@@ -29,6 +29,7 @@
       background:rgba(255,255,255,0.04); pointer-events:none;
     }
     .header-top { display:flex; align-items:center; gap:1.6rem; margin-bottom:2rem; }
+    .header-left { display:flex; align-items:center; gap:1.6rem; flex:1; min-width:0; }
     .avatar {
       width:80px; height:80px; border-radius:50%; flex-shrink:0;
       background:rgba(255,255,255,0.12); border:2px solid rgba(255,255,255,0.28);
@@ -47,6 +48,27 @@
       background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.8);
       border:0.5px solid rgba(255,255,255,0.18);
     }
+    /* Photo area */
+    .photo-upload-wrap { flex-shrink:0; }
+    .photo-box {
+      width:130px; height:155px; border-radius:14px;
+      border:3px solid rgba(255,255,255,0.4);
+      background:rgba(255,255,255,0.07);
+      overflow:hidden; position:relative;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.3);
+      cursor:pointer; transition:transform 0.2s, box-shadow 0.2s;
+    }
+    .photo-box:hover { transform:scale(1.03); box-shadow:0 14px 36px rgba(0,0,0,0.4); }
+    .photo-box img {
+      width:100%; height:100%; object-fit:cover; display:block;
+    }
+    .change-photo-label {
+      position:absolute; bottom:0; left:0; right:0;
+      background:rgba(0,0,0,0.55); color:#fff; font-size:10px;
+      text-align:center; padding:5px 0; opacity:0; transition:opacity 0.2s;
+    }
+    .photo-box:hover .change-photo-label { opacity:1; }
+    #photoInput { display:none; }
 
     /* ── TAB BAR ── */
     .tab-bar {
@@ -181,7 +203,10 @@
       .exp-card { grid-template-columns:1fr; }
       .tab-btn { padding:10px 12px; font-size:12px; }
       .header-top { flex-direction:column; text-align:center; }
+      .header-left { flex-direction:column; }
       .header-badges { justify-content:center; }
+      .photo-upload-wrap { order:-1; }
+      .photo-box { width:100px; height:115px; }
     }
   </style>
 </head>
@@ -190,15 +215,24 @@
 <!-- ── HEADER ── -->
 <header class="site-header">
   <div class="header-top">
-    <div class="avatar">VR</div>
-    <div class="header-info">
-      <h1>Vinitha <em>M</em> Rajan</h1>
-      <div class="header-role">Data Science Research Scholar</div>
-      <div class="header-badges">
-        <span class="header-badge">🤖 Machine Learning</span>
-        <span class="header-badge">📊 Statistical Modeling</span>
-        <span class="header-badge">🧠 Deep Learning</span>
-        <span class="header-badge">📈 Data Analytics</span>
+    <div class="header-left">
+      <div class="header-info">
+        <h1>Vinitha <em>M</em> Rajan</h1>
+        <div class="header-role">Data Science Research Scholar</div>
+        <div class="header-badges">
+          <span class="header-badge">🤖 Machine Learning</span>
+          <span class="header-badge">📊 Statistical Modeling</span>
+          <span class="header-badge">🧠 Deep Learning</span>
+          <span class="header-badge">📈 Data Analytics</span>
+        </div>
+      </div>
+    </div>
+    <!-- PHOTO -->
+    <div class="photo-upload-wrap">
+      <input type="file" id="photoInput" accept="image/*" onchange="loadPhoto(event)" />
+      <div class="photo-box" onclick="document.getElementById('photoInput').click()" title="Click to change photo">
+        <img id="profilePhoto" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMjAwIDIwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNkNGU4ZjciLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjYjhkNGVlIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJza2luIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmNWM1YTMiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZThhODdjIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJoYWlyIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMyYzFiMTgiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMWEwZjBkIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJkcmVzcyIgeDE9IjAiIHkxPSIwIiB4Mj0iMCIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMmQ0YTdhIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzFjMzE1NiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9InVybCgjYmcpIi8+CiAgPGVsbGlwc2UgY3g9IjEwMCIgY3k9IjE5NSIgcng9IjYyIiByeT0iNDUiIGZpbGw9InVybCgjZHJlc3MpIi8+CiAgPHJlY3QgeD0iODgiIHk9IjEyOCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI2IiByeD0iOCIgZmlsbD0idXJsKCNza2luKSIvPgogIDxlbGxpcHNlIGN4PSIxMDAiIGN5PSI5MCIgcng9IjQ0IiByeT0iNTAiIGZpbGw9InVybCgjaGFpcikiLz4KICA8cmVjdCB4PSI1NiIgeT0iODgiIHdpZHRoPSIxOCIgaGVpZ2h0PSI3MCIgcng9IjkiIGZpbGw9InVybCgjaGFpcikiLz4KICA8cmVjdCB4PSIxMjYiIHk9Ijg4IiB3aWR0aD0iMTgiIGhlaWdodD0iNzAiIHJ4PSI5IiBmaWxsPSJ1cmwoI2hhaXIpIi8+CiAgPGVsbGlwc2UgY3g9IjEwMCIgY3k9IjEwNCIgcng9IjM4IiByeT0iNDIiIGZpbGw9InVybCgjc2tpbikiLz4KICA8ZWxsaXBzZSBjeD0iMTAwIiBjeT0iNjgiIHJ4PSI0MCIgcnk9IjI4IiBmaWxsPSJ1cmwoI2hhaXIpIi8+CiAgPGVsbGlwc2UgY3g9IjEwMCIgY3k9IjYyIiByeD0iNiIgcnk9IjIwIiBmaWxsPSIjMWEwZjBkIi8+CiAgPHBhdGggZD0iTTc4IDg4IFE4NSA4NCA5MiA4NyIgc3Ryb2tlPSIjMmMxYjE4IiBzdHJva2Utd2lkdGg9IjIuNSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTEwOCA4NyBRMTE1IDg0IDEyMiA4OCIgc3Ryb2tlPSIjMmMxYjE4IiBzdHJva2Utd2lkdGg9IjIuNSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPGVsbGlwc2UgY3g9Ijg1IiBjeT0iOTYiIHJ4PSI3IiByeT0iNyIgZmlsbD0id2hpdGUiLz4KICA8ZWxsaXBzZSBjeD0iMTE1IiBjeT0iOTYiIHJ4PSI3IiByeT0iNyIgZmlsbD0id2hpdGUiLz4KICA8Y2lyY2xlIGN4PSI4NiIgY3k9Ijk3IiByPSI0LjUiIGZpbGw9IiMzZDIzMTQiLz4KICA8Y2lyY2xlIGN4PSIxMTYiIGN5PSI5NyIgcj0iNC41IiBmaWxsPSIjM2QyMzE0Ii8+CiAgPGNpcmNsZSBjeD0iODcuNSIgY3k9Ijk1LjUiIHI9IjEuNSIgZmlsbD0id2hpdGUiLz4KICA8Y2lyY2xlIGN4PSIxMTcuNSIgY3k9Ijk1LjUiIHI9IjEuNSIgZmlsbD0id2hpdGUiLz4KICA8cGF0aCBkPSJNNzggOTIgUTg1IDg5IDkyIDkyIiBzdHJva2U9IiMyYzFiMTgiIHN0cm9rZS13aWR0aD0iMS41IiBmaWxsPSJub25lIi8+CiAgPHBhdGggZD0iTTEwOCA5MiBRMTE1IDg5IDEyMiA5MiIgc3Ryb2tlPSIjMmMxYjE4IiBzdHJva2Utd2lkdGg9IjEuNSIgZmlsbD0ibm9uZSIvPgogIDxlbGxpcHNlIGN4PSIxMDAiIGN5PSIxMTAiIHJ4PSIzIiByeT0iMiIgZmlsbD0iI2Q0OTU2YSIgb3BhY2l0eT0iMC42Ii8+CiAgPHBhdGggZD0iTTk1IDEwNyBRMTAwIDExNCAxMDUgMTA3IiBzdHJva2U9IiNkNDk1NmEiIHN0cm9rZS13aWR0aD0iMS41IiBmaWxsPSJub25lIiBvcGFjaXR5PSIwLjUiLz4KICA8cGF0aCBkPSJNODggMTIwIFExMDAgMTMwIDExMiAxMjAiIHN0cm9rZT0iI2MwNzI1YSIgc3Ryb2tlLXdpZHRoPSIyIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNOTEgMTIxIFExMDAgMTI4IDEwOSAxMjEiIHN0cm9rZT0ibm9uZSIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuOCIvPgogIDxlbGxpcHNlIGN4PSI2MiIgY3k9IjEwNCIgcng9IjciIHJ5PSI5IiBmaWxsPSJ1cmwoI3NraW4pIi8+CiAgPGVsbGlwc2UgY3g9IjEzOCIgY3k9IjEwNCIgcng9IjciIHJ5PSI5IiBmaWxsPSJ1cmwoI3NraW4pIi8+CiAgPGNpcmNsZSBjeD0iNjIiIGN5PSIxMTEiIHI9IjMiIGZpbGw9IiNmMGMwNDAiLz4KICA8Y2lyY2xlIGN4PSIxMzgiIGN5PSIxMTEiIHI9IjMiIGZpbGw9IiNmMGMwNDAiLz4KICA8Y2lyY2xlIGN4PSIxMDAiIGN5PSI4MiIgcj0iMyIgZmlsbD0iI2NjMjIwMCIvPgogIDxwYXRoIGQ9Ik04MCAxNTQgUTEwMCAxNDggMTIwIDE1NCBRMTEwIDE2MCAxMDAgMTU4IFE5MCAxNjAgODAgMTU0WiIgZmlsbD0iIzNhNWY5YSIvPgo8L3N2Zz4=" alt="Profile photo of Vinitha M Rajan" />
+        <div class="change-photo-label">Change photo</div>
       </div>
     </div>
   </div>
@@ -623,6 +657,20 @@
     document.getElementById('tab-' + id).classList.add('active');
     btn.classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function loadPhoto(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const img = document.getElementById('profilePhoto');
+      const placeholder = document.getElementById('photoPlaceholder');
+      img.src = e.target.result;
+      img.style.display = 'block';
+      placeholder.style.display = 'none';
+    };
+    reader.readAsDataURL(file);
   }
 </script>
 </body>
