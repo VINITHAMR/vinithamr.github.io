@@ -15,29 +15,23 @@
       --border: rgba(28,26,24,0.1); --shadow: 0 2px 16px rgba(0,0,0,0.07);
     }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Lato', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.7; min-height: 100vh; }
+    body { font-family: "Lato", sans-serif; background: var(--bg); color: var(--ink); line-height: 1.7; }
 
     /* ── HEADER ── */
     .site-header {
       background: linear-gradient(135deg, #1c3156 0%, #2d4a7a 60%, #3a5f9a 100%);
-      color: #fff; padding: 2.5rem 3rem 0;
+      color: #fff; padding: 2.5rem 3rem 2rem;
       position: relative; overflow: hidden;
     }
     .site-header::before {
-      content:''; position:absolute; top:-60px; right:-60px;
+      content:""; position:absolute; top:-60px; right:-60px;
       width:320px; height:320px; border-radius:50%;
       background:rgba(255,255,255,0.04); pointer-events:none;
     }
-    .header-top { display:flex; align-items:center; gap:1.6rem; margin-bottom:2rem; }
+    .header-top { display:flex; align-items:center; gap:1.6rem; }
     .header-left { display:flex; align-items:center; gap:1.6rem; flex:1; min-width:0; }
-    .avatar {
-      width:80px; height:80px; border-radius:50%; flex-shrink:0;
-      background:rgba(255,255,255,0.12); border:2px solid rgba(255,255,255,0.28);
-      display:flex; align-items:center; justify-content:center;
-      font-family:'Playfair Display',serif; font-size:1.8rem; color:#fff;
-    }
     .header-info h1 {
-      font-family:'Playfair Display',serif; font-size:clamp(1.6rem,3vw,2.2rem);
+      font-family:"Playfair Display",serif; font-size:clamp(1.6rem,3vw,2.2rem);
       font-weight:600; line-height:1.15; margin-bottom:4px;
     }
     .header-info h1 em { font-style:italic; color:#a8c4e8; }
@@ -48,20 +42,16 @@
       background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.8);
       border:0.5px solid rgba(255,255,255,0.18);
     }
-    /* Photo area */
     .photo-upload-wrap { flex-shrink:0; }
     .photo-box {
-      width:130px; height:155px; border-radius:14px;
+      width:120px; height:145px; border-radius:14px;
       border:3px solid rgba(255,255,255,0.4);
-      background:rgba(255,255,255,0.07);
       overflow:hidden; position:relative;
       box-shadow: 0 8px 28px rgba(0,0,0,0.3);
-      cursor:pointer; transition:transform 0.2s, box-shadow 0.2s;
+      cursor:pointer; transition:transform 0.2s,box-shadow 0.2s;
     }
     .photo-box:hover { transform:scale(1.03); box-shadow:0 14px 36px rgba(0,0,0,0.4); }
-    .photo-box img {
-      width:100%; height:100%; object-fit:cover; display:block;
-    }
+    .photo-box img { width:100%; height:100%; object-fit:cover; display:block; }
     .change-photo-label {
       position:absolute; bottom:0; left:0; right:0;
       background:rgba(0,0,0,0.55); color:#fff; font-size:10px;
@@ -70,33 +60,46 @@
     .photo-box:hover .change-photo-label { opacity:1; }
     #photoInput { display:none; }
 
-    /* ── TAB BAR ── */
-    .tab-bar {
-      display:flex; gap:0; overflow-x:auto;
-      margin-top:1.5rem; padding:0;
-      scrollbar-width:none;
+    /* ── STICKY NAV ── */
+    .sticky-nav {
+      position:sticky; top:0; z-index:100;
+      background:rgba(255,255,255,0.96); backdrop-filter:blur(10px);
+      border-bottom:0.5px solid var(--border);
+      display:flex; overflow-x:auto; scrollbar-width:none;
     }
-    .tab-bar::-webkit-scrollbar { display:none; }
-    .tab-btn {
-      flex-shrink:0; padding:12px 18px;
-      background:transparent; border:none; cursor:pointer;
-      font-family:'Lato',sans-serif; font-size:13px; font-weight:400;
-      color:rgba(255,255,255,0.6); border-bottom:3px solid transparent;
-      transition:all 0.2s; white-space:nowrap; display:flex; align-items:center; gap:6px;
+    .sticky-nav::-webkit-scrollbar { display:none; }
+    .nav-link {
+      flex-shrink:0; padding:12px 18px; font-size:13px; font-weight:400;
+      color:var(--ink2); text-decoration:none; white-space:nowrap;
+      border-bottom:3px solid transparent; transition:all 0.2s;
+      display:flex; align-items:center; gap:6px;
     }
-    .tab-btn:hover { color:rgba(255,255,255,0.9); background:rgba(255,255,255,0.06); }
-    .tab-btn.active { color:#fff; border-bottom-color:#fff; font-weight:700; }
-    .tab-icon { font-size:14px; }
+    .nav-link:hover { color:var(--accent); border-bottom-color:var(--accent2); }
+    .nav-link.active { color:var(--accent); font-weight:700; border-bottom-color:var(--accent); }
 
-    /* ── CONTENT AREA ── */
-    .content-area { padding:2.75rem 3rem; max-width:1000px; }
-    .tab-panel { display:none; animation:fadeIn 0.25s ease; }
-    .tab-panel.active { display:block; }
-    @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+    /* ── CONTACT BAR ── */
+    .contact-bar {
+      background:#fff; border-top:0.5px solid var(--border);
+      display:flex; gap:0; justify-content:center; flex-wrap:wrap;
+      padding:0.7rem 1rem;
+    }
+    .contact-link {
+      display:inline-flex; align-items:center; gap:7px;
+      padding:8px 18px; font-size:13px; color:var(--ink2);
+      text-decoration:none; border-right:0.5px solid var(--border);
+      transition:color 0.2s,background 0.2s;
+    }
+    .contact-link:last-child { border-right:none; }
+    .contact-link:hover { color:var(--accent); background:var(--accent-light); }
 
-    /* ── SECTION HEADER ── */
+    /* ── PAGE SECTIONS ── */
+    .page-section {
+      padding:3.5rem 3rem;
+      border-bottom:0.5px solid var(--border);
+    }
+    .page-section:nth-child(even) { background:var(--bg2); }
     .section-label { font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent2); margin-bottom:3px; }
-    .section-title { font-family:'Playfair Display',serif; font-size:1.65rem; color:var(--ink); }
+    .section-title { font-family:"Playfair Display",serif; font-size:1.65rem; color:var(--ink); }
     .section-divider { width:36px; height:2px; background:var(--accent2); margin-top:6px; border-radius:2px; margin-bottom:2rem; }
 
     /* ── ACADEMIC ── */
@@ -122,13 +125,21 @@
     .research-card p { font-size:12.5px; color:var(--ink2); line-height:1.6; }
     .r-tag { display:inline-block; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px; background:var(--green-light); color:var(--green); margin-top:8px; text-transform:uppercase; letter-spacing:0.06em; }
 
+    /* ── SKILLS ── */
+    .skills-section { margin-top:2.5rem; }
+    .skills-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; margin-top:1rem; }
+    .skill-group { background:#fff; border:0.5px solid var(--border); border-radius:10px; padding:1rem 1.2rem; }
+    .skill-group-label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--ink3); margin-bottom:8px; }
+    .skill-pills { display:flex; flex-wrap:wrap; gap:6px; }
+    .skill-pill { font-size:12px; padding:3px 11px; border-radius:20px; background:var(--bg2); color:var(--ink2); border:0.5px solid var(--border); }
+
     /* ── TWO-COL ── */
     .two-col { display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; }
     .col-label { font-size:12px; font-weight:700; color:var(--ink2); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1rem; }
 
     /* ── TIMELINE ── */
     .timeline { position:relative; padding-left:22px; }
-    .timeline::before { content:''; position:absolute; left:6px; top:6px; bottom:6px; width:1px; background:var(--border); }
+    .timeline::before { content:""; position:absolute; left:6px; top:6px; bottom:6px; width:1px; background:var(--border); }
     .timeline-item { position:relative; margin-bottom:1.5rem; }
     .timeline-item:last-child { margin-bottom:0; }
     .timeline-dot { position:absolute; left:-19px; top:5px; width:9px; height:9px; border-radius:50%; background:var(--accent2); border:2px solid var(--bg); }
@@ -139,7 +150,7 @@
     .tl-sub { font-size:12.5px; color:var(--ink2); }
     .tl-sub span { color:var(--gold); font-weight:700; }
 
-    /* ── CARDS ── */
+    /* ── ITEM CARDS ── */
     .item-card { background:#fff; border:0.5px solid var(--border); border-radius:10px; padding:1rem 1.2rem; margin-bottom:11px; }
     .item-card:last-child { margin-bottom:0; }
     .item-title { font-size:13.5px; font-weight:700; color:var(--ink); margin-bottom:3px; }
@@ -169,44 +180,21 @@
     .interest-list { display:flex; flex-wrap:wrap; gap:7px; }
     .interest-pill { font-size:12px; padding:4px 12px; border-radius:20px; background:var(--bg2); color:var(--ink2); border:0.5px solid var(--border); }
 
-    /* ── CONTACT BAR ── */
-    .contact-bar {
-      background:#fff; border-top:0.5px solid var(--border);
-      display:flex; gap:0; justify-content:center; flex-wrap:wrap;
-      padding:0.75rem 1rem;
-    }
-    .contact-link {
-      display:inline-flex; align-items:center; gap:7px;
-      padding:8px 18px; font-size:13px; color:var(--ink2);
-      text-decoration:none; border-right:0.5px solid var(--border);
-      transition:color 0.2s,background 0.2s;
-    }
-    .contact-link:last-child { border-right:none; }
-    .contact-link:hover { color:var(--accent); background:var(--accent-light); }
-
     /* ── FOOTER ── */
-    footer { text-align:center; padding:1.2rem; font-size:12px; background:var(--accent); color:rgba(255,255,255,0.45); }
-
-    /* ── SKILLS (inside research tab) ── */
-    .skills-section { margin-top:2.5rem; }
-    .skills-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; margin-top:1rem; }
-    .skill-group { background:#fff; border:0.5px solid var(--border); border-radius:10px; padding:1rem 1.2rem; }
-    .skill-group-label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--ink3); margin-bottom:8px; }
-    .skill-pills { display:flex; flex-wrap:wrap; gap:6px; }
-    .skill-pill { font-size:12px; padding:3px 11px; border-radius:20px; background:var(--bg2); color:var(--ink2); border:0.5px solid var(--border); }
+    footer { text-align:center; padding:1.4rem; font-size:12px; background:var(--accent); color:rgba(255,255,255,0.45); }
 
     /* ── RESPONSIVE ── */
     @media (max-width:720px) {
-      .site-header { padding:2rem 1.25rem 0; }
-      .content-area { padding:2rem 1.25rem; }
+      .site-header { padding:2rem 1.25rem 1.5rem; }
+      .page-section { padding:2.5rem 1.25rem; }
       .academic-grid,.two-col,.personal-grid { grid-template-columns:1fr; }
       .exp-card { grid-template-columns:1fr; }
-      .tab-btn { padding:10px 12px; font-size:12px; }
       .header-top { flex-direction:column; text-align:center; }
       .header-left { flex-direction:column; }
       .header-badges { justify-content:center; }
       .photo-upload-wrap { order:-1; }
       .photo-box { width:100px; height:115px; }
+      .nav-link { padding:10px 12px; font-size:12px; }
     }
   </style>
 </head>
@@ -221,34 +209,34 @@
         <div class="header-role">Data Science Research Scholar</div>
         <div class="header-badges">
           <span class="header-badge">🤖 Machine Learning</span>
-          <!--<span class="header-badge">📊 Statistical Modeling</span>-->
           <span class="header-badge">🧠 Deep Learning</span>
           <span class="header-badge">📈 Time Series Analysis</span>
           <span class="header-badge">🔍 Explainable AI</span>
         </div>
       </div>
     </div>
-    <!-- PHOTO -->
     <div class="photo-upload-wrap">
-      <input type="file" id="photoInput" accept="image/*" onchange="loadPhoto(event)" />
-      <div class="photo-box" onclick="document.getElementById('photoInput').click()" title="Click to change photo">
-        <img id="profilePhoto" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMjAwIDIwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNkNGU4ZjciLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjYjhkNGVlIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJza2luIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmNWM1YTMiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZThhODdjIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJoYWlyIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMyYzFiMTgiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMWEwZjBkIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJkcmVzcyIgeDE9IjAiIHkxPSIwIiB4Mj0iMCIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMmQ0YTdhIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzFjMzE1NiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9InVybCgjYmcpIi8+CiAgPGVsbGlwc2UgY3g9IjEwMCIgY3k9IjE5NSIgcng9IjYyIiByeT0iNDUiIGZpbGw9InVybCgjZHJlc3MpIi8+CiAgPHJlY3QgeD0iODgiIHk9IjEyOCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI2IiByeD0iOCIgZmlsbD0idXJsKCNza2luKSIvPgogIDxlbGxpcHNlIGN4PSIxMDAiIGN5PSI5MCIgcng9IjQ0IiByeT0iNTAiIGZpbGw9InVybCgjaGFpcikiLz4KICA8cmVjdCB4PSI1NiIgeT0iODgiIHdpZHRoPSIxOCIgaGVpZ2h0PSI3MCIgcng9IjkiIGZpbGw9InVybCgjaGFpcikiLz4KICA8cmVjdCB4PSIxMjYiIHk9Ijg4IiB3aWR0aD0iMTgiIGhlaWdodD0iNzAiIHJ4PSI5IiBmaWxsPSJ1cmwoI2hhaXIpIi8+CiAgPGVsbGlwc2UgY3g9IjEwMCIgY3k9IjEwNCIgcng9IjM4IiByeT0iNDIiIGZpbGw9InVybCgjc2tpbikiLz4KICA8ZWxsaXBzZSBjeD0iMTAwIiBjeT0iNjgiIHJ4PSI0MCIgcnk9IjI4IiBmaWxsPSJ1cmwoI2hhaXIpIi8+CiAgPGVsbGlwc2UgY3g9IjEwMCIgY3k9IjYyIiByeD0iNiIgcnk9IjIwIiBmaWxsPSIjMWEwZjBkIi8+CiAgPHBhdGggZD0iTTc4IDg4IFE4NSA4NCA5MiA4NyIgc3Ryb2tlPSIjMmMxYjE4IiBzdHJva2Utd2lkdGg9IjIuNSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTEwOCA4NyBRMTE1IDg0IDEyMiA4OCIgc3Ryb2tlPSIjMmMxYjE4IiBzdHJva2Utd2lkdGg9IjIuNSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPGVsbGlwc2UgY3g9Ijg1IiBjeT0iOTYiIHJ4PSI3IiByeT0iNyIgZmlsbD0id2hpdGUiLz4KICA8ZWxsaXBzZSBjeD0iMTE1IiBjeT0iOTYiIHJ4PSI3IiByeT0iNyIgZmlsbD0id2hpdGUiLz4KICA8Y2lyY2xlIGN4PSI4NiIgY3k9Ijk3IiByPSI0LjUiIGZpbGw9IiMzZDIzMTQiLz4KICA8Y2lyY2xlIGN4PSIxMTYiIGN5PSI5NyIgcj0iNC41IiBmaWxsPSIjM2QyMzE0Ii8+CiAgPGNpcmNsZSBjeD0iODcuNSIgY3k9Ijk1LjUiIHI9IjEuNSIgZmlsbD0id2hpdGUiLz4KICA8Y2lyY2xlIGN4PSIxMTcuNSIgY3k9Ijk1LjUiIHI9IjEuNSIgZmlsbD0id2hpdGUiLz4KICA8cGF0aCBkPSJNNzggOTIgUTg1IDg5IDkyIDkyIiBzdHJva2U9IiMyYzFiMTgiIHN0cm9rZS13aWR0aD0iMS41IiBmaWxsPSJub25lIi8+CiAgPHBhdGggZD0iTTEwOCA5MiBRMTE1IDg5IDEyMiA5MiIgc3Ryb2tlPSIjMmMxYjE4IiBzdHJva2Utd2lkdGg9IjEuNSIgZmlsbD0ibm9uZSIvPgogIDxlbGxpcHNlIGN4PSIxMDAiIGN5PSIxMTAiIHJ4PSIzIiByeT0iMiIgZmlsbD0iI2Q0OTU2YSIgb3BhY2l0eT0iMC42Ii8+CiAgPHBhdGggZD0iTTk1IDEwNyBRMTAwIDExNCAxMDUgMTA3IiBzdHJva2U9IiNkNDk1NmEiIHN0cm9rZS13aWR0aD0iMS41IiBmaWxsPSJub25lIiBvcGFjaXR5PSIwLjUiLz4KICA8cGF0aCBkPSJNODggMTIwIFExMDAgMTMwIDExMiAxMjAiIHN0cm9rZT0iI2MwNzI1YSIgc3Ryb2tlLXdpZHRoPSIyIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNOTEgMTIxIFExMDAgMTI4IDEwOSAxMjEiIHN0cm9rZT0ibm9uZSIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuOCIvPgogIDxlbGxpcHNlIGN4PSI2MiIgY3k9IjEwNCIgcng9IjciIHJ5PSI5IiBmaWxsPSJ1cmwoI3NraW4pIi8+CiAgPGVsbGlwc2UgY3g9IjEzOCIgY3k9IjEwNCIgcng9IjciIHJ5PSI5IiBmaWxsPSJ1cmwoI3NraW4pIi8+CiAgPGNpcmNsZSBjeD0iNjIiIGN5PSIxMTEiIHI9IjMiIGZpbGw9IiNmMGMwNDAiLz4KICA8Y2lyY2xlIGN4PSIxMzgiIGN5PSIxMTEiIHI9IjMiIGZpbGw9IiNmMGMwNDAiLz4KICA8Y2lyY2xlIGN4PSIxMDAiIGN5PSI4MiIgcj0iMyIgZmlsbD0iI2NjMjIwMCIvPgogIDxwYXRoIGQ9Ik04MCAxNTQgUTEwMCAxNDggMTIwIDE1NCBRMTEwIDE2MCAxMDAgMTU4IFE5MCAxNjAgODAgMTU0WiIgZmlsbD0iIzNhNWY5YSIvPgo8L3N2Zz4=" alt="Profile photo of Vinitha M Rajan" />
-        <div class="change-photo-label">Change photo</div>
+      <div class="photo-box">
+        <!-- Replace photo.jpg with your actual image filename after uploading to GitHub -->
+        <img src="photo.jpg" alt="Profile photo of Vinitha M Rajan"
+             onerror="this.src='https://ui-avatars.com/api/?name=Vinitha+M+Rajan&size=300&background=2d4a7a&color=ffffff&bold=true&font-size=0.33'" />
       </div>
     </div>
   </div>
-
-  <!-- TAB BAR -->
-  <div class="tab-bar" role="tablist">
-    <button class="tab-btn active" role="tab" onclick="showTab('academic',this)"><span class="tab-icon">🎓</span>Academic Profile</button>
-    <button class="tab-btn" role="tab" onclick="showTab('research',this)"><span class="tab-icon">🔬</span>Research</button>
-    <button class="tab-btn" role="tab" onclick="showTab('courses',this)"><span class="tab-icon">📚</span>Courses & Workshops</button>
-    <button class="tab-btn" role="tab" onclick="showTab('teaching',this)"><span class="tab-icon">🏫</span>Teaching Assistance</button>
-    <button class="tab-btn" role="tab" onclick="showTab('talks',this)"><span class="tab-icon">🎤</span>Talks Attended</button>
-    <button class="tab-btn" role="tab" onclick="showTab('experience',this)"><span class="tab-icon">💼</span>Experience</button>
-    <button class="tab-btn" role="tab" onclick="showTab('personal',this)"><span class="tab-icon">🌿</span>Personal Profile</button>
+</div>
   </div>
 </header>
+
+<!-- ── STICKY NAV ── -->
+<nav class="sticky-nav" id="mainNav">
+  <a class="nav-link" href="#academic">🎓 Academic Profile</a>
+  <a class="nav-link" href="#research">🔬 Research</a>
+  <a class="nav-link" href="#courses">📚 Courses & Workshops</a>
+  <a class="nav-link" href="#teaching">🏫 Teaching Assistance</a>
+  <a class="nav-link" href="#talks">🎤 Talks Attended</a>
+  <a class="nav-link" href="#experience">💼 Experience</a>
+  <a class="nav-link" href="#personal">🌿 Personal Profile</a>
+</nav>
 
 <!-- CONTACT BAR -->
 <div class="contact-bar">
@@ -258,419 +246,397 @@
   <a href="#" class="contact-link">↓ Download CV</a>
 </div>
 
-<!-- ── CONTENT AREA ── -->
-<div class="content-area">
-
-  <!-- TAB 1: ACADEMIC PROFILE -->
-  <div class="tab-panel active" id="tab-academic">
-    <div class="section-label">Education</div>
-    <div class="section-title">Academic Profile</div>
-    <div class="section-divider"></div>
-    <div class="academic-grid">
-      <div class="edu-card">
-        <div class="edu-degree">Ph.D. (Pursuing)</div>
-        <div class="edu-field">Department Of Data Science</div>
-        <div class="edu-inst">Indian Institute Of Technology Palakkad, Kerala, India</div>
-        <div class="edu-year">2021 – Present</div>
-      </div>
-      <div class="edu-card">
-        <div class="edu-degree">M.Tech</div>
-        <div class="edu-field">Computer Science & Engineering</div>
-        <div class="edu-inst">College Of Engineering Trivandrum, India</div>
-        <div class="edu-year">2017 – 2019</div>
-      </div>
-      <div class="edu-card">
-        <div class="edu-degree">B.Tech</div>
-        <div class="edu-field">Computer Science & Engineering</div>
-        <div class="edu-inst">National Institute Of Technology Calicut, India</div>
-        <div class="edu-year">2004 – 2008</div>
-      </div>
-      <div class="edu-card">
-        <div class="edu-degree">Thesis</div>
-        <div class="edu-field">Deep Modeling Techniques For Time Series Anomaly Detection</div>
-        <div class="edu-inst">Supervised by Dr. Sahely Bhadra</div>
-        <div class="edu-year">Ongoing</div>
-      </div>
+<!-- ── SECTION 1: ACADEMIC PROFILE ── -->
+<section class="page-section" id="academic">
+  <div class="section-label">Education</div>
+  <div class="section-title">Academic Profile</div>
+  <div class="section-divider"></div>
+  <div class="academic-grid">
+    <div class="edu-card">
+      <div class="edu-degree">Ph.D. (Pursuing)</div>
+      <div class="edu-field">Department Of Data Science</div>
+      <div class="edu-inst">Indian Institute Of Technology Palakkad, Kerala, India</div>
+      <div class="edu-year">2021 – Present</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">M.Tech</div>
+      <div class="edu-field">Computer Science & Engineering</div>
+      <div class="edu-inst">College Of Engineering Trivandrum, India</div>
+      <div class="edu-year">2017 – 2019</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">B.Tech</div>
+      <div class="edu-field">Computer Science & Engineering</div>
+      <div class="edu-inst">National Institute Of Technology Calicut, India</div>
+      <div class="edu-year">2004 – 2008</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">Thesis</div>
+      <div class="edu-field">Deep Modeling Techniques For Time Series Anomaly Detection</div>
+      <div class="edu-inst">Supervised by Dr. Sahely Bhadra</div>
+      <div class="edu-year">Ongoing</div>
     </div>
   </div>
+</section>
 
-  <!-- TAB 2: RESEARCH -->
-  <div class="tab-panel" id="tab-research">
-    <div class="section-label">Scholarly work</div>
-    <div class="section-title">Research</div>
-    <div class="section-divider"></div>
-    <div class="research-grid">
-      <div class="research-card">
-        <div class="r-icon">🤖</div>
-        <h3>Machine Learning</h3>
-        <p>Novel algorithms and architectures for improved accuracy, interpretability, and efficiency in classification and regression tasks.</p>
-        <span class="r-tag">Active</span>
-      </div>
-      <div class="research-card">
-        <div class="r-icon">🧠</div>
-        <h3>Deep Learning</h3>
-        <p>Exploring CNNs, RNNs, and Transformers for pattern recognition and prediction across diverse domains.</p>
-        <span class="r-tag">Active</span>
-      </div>
-      <div class="research-card">
-        <div class="r-icon">📐</div>
-        <h3>Statistical Modeling</h3>
-        <p>Bayesian and probabilistic approaches to model uncertainty, causal relationships, and complex data distributions.</p>
-        <span class="r-tag">Core focus</span>
-      </div>
-      <div class="research-card">
-        <div class="r-icon">📊</div>
-        <h3>Data Analytics</h3>
-        <p>Frameworks to extract actionable insights from large-scale, heterogeneous datasets across diverse domains.</p>
-        <span class="r-tag">Ongoing</span>
-      </div>
-      <div class="research-card">
-        <div class="r-icon">🌐</div>
-        <h3>Natural Language Processing</h3>
-        <p>Text mining, sentiment analysis, and language model applications for domain-specific understanding.</p>
-        <span class="r-tag">Exploring</span>
-      </div>
-      <div class="research-card">
-        <div class="r-icon">🔍</div>
-        <h3>Explainable AI</h3>
-        <p>Making AI models interpretable and transparent for high-stakes applications in healthcare and social science.</p>
-        <span class="r-tag">Exploring</span>
-      </div>
+<!-- ── SECTION 2: RESEARCH ── -->
+<section class="page-section" id="research">
+  <div class="section-label">Scholarly work</div>
+  <div class="section-title">Research</div>
+  <div class="section-divider"></div>
+  <div class="research-grid">
+    <div class="research-card">
+      <div class="r-icon">🤖</div>
+      <h3>Machine Learning</h3>
+      <p>Novel algorithms and architectures for improved accuracy, interpretability, and efficiency in classification and regression tasks.</p>
+      <span class="r-tag">Active</span>
     </div>
-
-    <!-- Skills inside Research tab -->
-    <div class="skills-section">
-      <div class="section-label">Toolkit</div>
-      <div class="section-title" style="font-size:1.3rem;">Skills & Tools</div>
-      <div class="section-divider"></div>
-      <div class="skills-grid">
-        <div class="skill-group">
-          <div class="skill-group-label">Programming</div>
-          <div class="skill-pills">
-            <span class="skill-pill">Python</span>
-            <span class="skill-pill">R</span>
-            <span class="skill-pill">SQL</span>
-            <span class="skill-pill">MATLAB</span>
-          </div>
+    <div class="research-card">
+      <div class="r-icon">🧠</div>
+      <h3>Deep Learning</h3>
+      <p>Exploring CNNs, RNNs, and Transformers for pattern recognition and prediction across diverse domains.</p>
+      <span class="r-tag">Active</span>
+    </div>
+    <div class="research-card">
+      <div class="r-icon">📐</div>
+      <h3>Statistical Modeling</h3>
+      <p>Bayesian and probabilistic approaches to model uncertainty, causal relationships, and complex data distributions.</p>
+      <span class="r-tag">Core focus</span>
+    </div>
+    <div class="research-card">
+      <div class="r-icon">📊</div>
+      <h3>Data Analytics</h3>
+      <p>Frameworks to extract actionable insights from large-scale, heterogeneous datasets across diverse domains.</p>
+      <span class="r-tag">Ongoing</span>
+    </div>
+    <div class="research-card">
+      <div class="r-icon">🌐</div>
+      <h3>Natural Language Processing</h3>
+      <p>Text mining, sentiment analysis, and language model applications for domain-specific understanding.</p>
+      <span class="r-tag">Exploring</span>
+    </div>
+    <div class="research-card">
+      <div class="r-icon">🔍</div>
+      <h3>Explainable AI</h3>
+      <p>Making AI models interpretable and transparent for high-stakes applications in healthcare and social science.</p>
+      <span class="r-tag">Exploring</span>
+    </div>
+  </div>
+  <div class="skills-section">
+    <div class="section-label">Toolkit</div>
+    <div class="section-title" style="font-size:1.3rem;">Skills & Tools</div>
+    <div class="section-divider"></div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-label">Programming</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Python</span><span class="skill-pill">R</span>
+          <span class="skill-pill">SQL</span><span class="skill-pill">MATLAB</span>
         </div>
-        <div class="skill-group">
-          <div class="skill-group-label">ML / Data</div>
-          <div class="skill-pills">
-            <span class="skill-pill">PyTorch</span>
-            <span class="skill-pill">TensorFlow</span>
-            <span class="skill-pill">Scikit-learn</span>
-            <span class="skill-pill">Pandas</span>
-            <span class="skill-pill">NumPy</span>
-          </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">ML / Data</div>
+        <div class="skill-pills">
+          <span class="skill-pill">PyTorch</span><span class="skill-pill">TensorFlow</span>
+          <span class="skill-pill">Scikit-learn</span><span class="skill-pill">Pandas</span><span class="skill-pill">NumPy</span>
         </div>
-        <div class="skill-group">
-          <div class="skill-group-label">Visualization</div>
-          <div class="skill-pills">
-            <span class="skill-pill">Matplotlib</span>
-            <span class="skill-pill">Seaborn</span>
-            <span class="skill-pill">Plotly</span>
-            <span class="skill-pill">Tableau</span>
-          </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Visualization</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Matplotlib</span><span class="skill-pill">Seaborn</span>
+          <span class="skill-pill">Plotly</span><span class="skill-pill">Tableau</span>
         </div>
-        <div class="skill-group">
-          <div class="skill-group-label">Platforms</div>
-          <div class="skill-pills">
-            <span class="skill-pill">Jupyter</span>
-            <span class="skill-pill">Google Colab</span>
-            <span class="skill-pill">Git / GitHub</span>
-            <span class="skill-pill">Linux</span>
-          </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Platforms</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Jupyter</span><span class="skill-pill">Google Colab</span>
+          <span class="skill-pill">Git / GitHub</span><span class="skill-pill">Linux</span>
         </div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- TAB 3: COURSES & WORKSHOPS -->
-  <div class="tab-panel" id="tab-courses">
-    <div class="section-label">Learning & development</div>
-    <div class="section-title">Courses & Workshops</div>
-    <div class="section-divider"></div>
-    <div class="two-col">
-      <div>
-        <div class="col-label">Online Certifications</div>
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="tl-meta"><span class="tl-year">2024</span><span class="tl-type">Certification</span></div>
-            <div class="tl-title">Deep Learning Specialization</div>
-            <div class="tl-sub"><span>Coursera</span> · Andrew Ng, deeplearning.ai</div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="tl-meta"><span class="tl-year">2023</span><span class="tl-type">Certification</span></div>
-            <div class="tl-title">Machine Learning with Python</div>
-            <div class="tl-sub"><span>IBM / Coursera</span> · Advanced track</div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="tl-meta"><span class="tl-year">2022</span><span class="tl-type">Course</span></div>
-            <div class="tl-title">Data Science & Big Data Analytics</div>
-            <div class="tl-sub"><span>NPTEL</span> · IIT Madras</div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="tl-meta"><span class="tl-year">2022</span><span class="tl-type">Course</span></div>
-            <div class="tl-title">Statistical Learning</div>
-            <div class="tl-sub"><span>edX</span> · Stanford Online</div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="tl-meta"><span class="tl-year">2021</span><span class="tl-type">Certification</span></div>
-            <div class="tl-title">Python for Everybody Specialization</div>
-            <div class="tl-sub"><span>Coursera</span> · University of Michigan</div>
-          </div>
+<!-- ── SECTION 3: COURSES & WORKSHOPS ── -->
+<section class="page-section" id="courses">
+  <div class="section-label">Learning & development</div>
+  <div class="section-title">Courses & Workshops</div>
+  <div class="section-divider"></div>
+  <div class="two-col">
+    <div>
+      <div class="col-label">Online Certifications</div>
+      <div class="timeline">
+        <div class="timeline-item"><div class="timeline-dot"></div>
+          <div class="tl-meta"><span class="tl-year">2024</span><span class="tl-type">Certification</span></div>
+          <div class="tl-title">Deep Learning Specialization</div>
+          <div class="tl-sub"><span>Coursera</span> · Andrew Ng, deeplearning.ai</div>
+        </div>
+        <div class="timeline-item"><div class="timeline-dot"></div>
+          <div class="tl-meta"><span class="tl-year">2023</span><span class="tl-type">Certification</span></div>
+          <div class="tl-title">Machine Learning with Python</div>
+          <div class="tl-sub"><span>IBM / Coursera</span> · Advanced track</div>
+        </div>
+        <div class="timeline-item"><div class="timeline-dot"></div>
+          <div class="tl-meta"><span class="tl-year">2022</span><span class="tl-type">Course</span></div>
+          <div class="tl-title">Data Science & Big Data Analytics</div>
+          <div class="tl-sub"><span>NPTEL</span> · IIT Madras</div>
+        </div>
+        <div class="timeline-item"><div class="timeline-dot"></div>
+          <div class="tl-meta"><span class="tl-year">2022</span><span class="tl-type">Course</span></div>
+          <div class="tl-title">Statistical Learning</div>
+          <div class="tl-sub"><span>edX</span> · Stanford Online</div>
+        </div>
+        <div class="timeline-item"><div class="timeline-dot"></div>
+          <div class="tl-meta"><span class="tl-year">2021</span><span class="tl-type">Certification</span></div>
+          <div class="tl-title">Python for Everybody Specialization</div>
+          <div class="tl-sub"><span>Coursera</span> · University of Michigan</div>
         </div>
       </div>
-      <div>
-        <div class="col-label">Workshops Attended</div>
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="tl-meta"><span class="tl-year">2024</span><span class="tl-type">Workshop</span></div>
-            <div class="tl-title">National Workshop on AI & ML</div>
-            <div class="tl-sub"><span>Your Institution</span> · 5-day hands-on workshop</div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="tl-meta"><span class="tl-year">2023</span><span class="tl-type">Workshop</span></div>
-            <div class="tl-title">Python for Data Science Bootcamp</div>
-            <div class="tl-sub"><span>Institution Name</span> · 3-day workshop</div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="tl-meta"><span class="tl-year">2023</span><span class="tl-type">FDP</span></div>
-            <div class="tl-title">Faculty Development Programme on Data Analytics</div>
-            <div class="tl-sub"><span>AICTE / Institution</span></div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="tl-meta"><span class="tl-year">2022</span><span class="tl-type">Seminar</span></div>
-            <div class="tl-title">Research Methodology & Technical Writing</div>
-            <div class="tl-sub"><span>Your University</span></div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="tl-meta"><span class="tl-year">2021</span><span class="tl-type">Workshop</span></div>
-            <div class="tl-title">Introduction to R for Statistics</div>
-            <div class="tl-sub"><span>Department of Statistics</span> · Your University</div>
-          </div>
+    </div>
+    <div>
+      <div class="col-label">Workshops Attended</div>
+      <div class="timeline">
+        <div class="timeline-item"><div class="timeline-dot"></div>
+          <div class="tl-meta"><span class="tl-year">2024</span><span class="tl-type">Workshop</span></div>
+          <div class="tl-title">National Workshop on AI & ML</div>
+          <div class="tl-sub"><span>Your Institution</span> · 5-day hands-on workshop</div>
+        </div>
+        <div class="timeline-item"><div class="timeline-dot"></div>
+          <div class="tl-meta"><span class="tl-year">2023</span><span class="tl-type">Workshop</span></div>
+          <div class="tl-title">Python for Data Science Bootcamp</div>
+          <div class="tl-sub"><span>Institution Name</span> · 3-day workshop</div>
+        </div>
+        <div class="timeline-item"><div class="timeline-dot"></div>
+          <div class="tl-meta"><span class="tl-year">2023</span><span class="tl-type">FDP</span></div>
+          <div class="tl-title">Faculty Development Programme on Data Analytics</div>
+          <div class="tl-sub"><span>AICTE / Institution</span></div>
+        </div>
+        <div class="timeline-item"><div class="timeline-dot"></div>
+          <div class="tl-meta"><span class="tl-year">2022</span><span class="tl-type">Seminar</span></div>
+          <div class="tl-title">Research Methodology & Technical Writing</div>
+          <div class="tl-sub"><span>Your University</span></div>
+        </div>
+        <div class="timeline-item"><div class="timeline-dot"></div>
+          <div class="tl-meta"><span class="tl-year">2021</span><span class="tl-type">Workshop</span></div>
+          <div class="tl-title">Introduction to R for Statistics</div>
+          <div class="tl-sub"><span>Department of Statistics</span> · Your University</div>
         </div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- TAB 4: TEACHING ASSISTANCE -->
-  <div class="tab-panel" id="tab-teaching">
-    <div class="section-label">Pedagogy</div>
-    <div class="section-title">Teaching Assistance</div>
-    <div class="section-divider"></div>
-    <div class="exp-card">
-      <div>
-        <div class="exp-role">Teaching Assistant — Data Structures & Algorithms</div>
-        <div class="exp-org">Department of Computer Science, Your University</div>
-        <div class="exp-desc">Conducted weekly tutorial sessions for undergraduate students, graded assignments and exams, and provided one-on-one mentoring to support academic progress.</div>
-        <span class="item-badge badge-blue">UG Level</span>
-      </div>
-      <div class="exp-period">Jan 2023 – Present</div>
+<!-- ── SECTION 4: TEACHING ASSISTANCE ── -->
+<section class="page-section" id="teaching">
+  <div class="section-label">Pedagogy</div>
+  <div class="section-title">Teaching Assistance</div>
+  <div class="section-divider"></div>
+  <div class="exp-card">
+    <div>
+      <div class="exp-role">Teaching Assistant — Data Structures & Algorithms</div>
+      <div class="exp-org">Department of Computer Science, Your University</div>
+      <div class="exp-desc">Conducted weekly tutorial sessions for undergraduate students, graded assignments and exams, and provided one-on-one mentoring to support academic progress.</div>
+      <span class="item-badge badge-blue">UG Level</span>
     </div>
-    <div class="exp-card">
-      <div>
-        <div class="exp-role">Teaching Assistant — Machine Learning</div>
-        <div class="exp-org">Department of Computer Science, Your University</div>
-        <div class="exp-desc">Assisted course instructor in lab sessions, prepared tutorial materials, and helped students with project implementations using Python and scikit-learn.</div>
-        <span class="item-badge badge-blue">PG Level</span>
-      </div>
-      <div class="exp-period">Jul 2022 – Dec 2022</div>
-    </div>
-    <div class="exp-card">
-      <div>
-        <div class="exp-role">Lab Demonstrator — Python Programming</div>
-        <div class="exp-org">Department of Computer Science, Your University</div>
-        <div class="exp-desc">Guided first-year students through practical programming lab sessions covering Python fundamentals, data manipulation, and introductory data visualization.</div>
-        <span class="item-badge badge-blue">UG Level</span>
-      </div>
-      <div class="exp-period">Jul 2021 – May 2022</div>
-    </div>
-    <div class="exp-card">
-      <div>
-        <div class="exp-role">Mentor — Student Research Projects</div>
-        <div class="exp-org">Department of Computer Science, Your University</div>
-        <div class="exp-desc">Mentored 3rd and 4th year students on mini-projects involving data analysis, model building, and visualization using real-world datasets.</div>
-        <span class="item-badge badge-green">Mentoring</span>
-      </div>
-      <div class="exp-period">2022 – Present</div>
-    </div>
+    <div class="exp-period">Jan 2023 – Present</div>
   </div>
-
-  <!-- TAB 5: TALKS ATTENDED -->
-  <div class="tab-panel" id="tab-talks">
-    <div class="section-label">Knowledge exchange</div>
-    <div class="section-title">Talks Attended</div>
-    <div class="section-divider"></div>
-    <div class="two-col">
-      <div>
-        <div class="col-label">Conferences & Seminars</div>
-        <div class="item-card">
-          <div class="item-title">International Conference on Machine Learning (ICML)</div>
-          <div class="item-sub">Attended keynotes and paper presentations on generative models and representation learning.</div>
-          <span class="item-badge badge-gold">2024</span>
-        </div>
-        <div class="item-card">
-          <div class="item-title">National Conference on Data Science & AI</div>
-          <div class="item-sub">Participated as an attendee and presented a poster on your research topic.</div>
-          <span class="item-badge badge-gold">2023</span>
-        </div>
-        <div class="item-card">
-          <div class="item-title">IEEE International Symposium on Big Data</div>
-          <div class="item-sub">Attended sessions on cloud data platforms, real-time analytics, and federated learning.</div>
-          <span class="item-badge badge-gold">2023</span>
-        </div>
-        <div class="item-card">
-          <div class="item-title">International Symposium on AI in Healthcare</div>
-          <div class="item-sub">Sessions on medical imaging, predictive diagnostics, and ethical AI deployment.</div>
-          <span class="item-badge badge-gold">2022</span>
-        </div>
-      </div>
-      <div>
-        <div class="col-label">Guest Lectures & Webinars</div>
-        <div class="item-card">
-          <div class="item-title">Guest Lecture on Explainable AI</div>
-          <div class="item-sub">By Prof. Speaker Name, IIT / NIT · organised by Your University.</div>
-          <span class="item-badge badge-green">2024</span>
-        </div>
-        <div class="item-card">
-          <div class="item-title">Webinar: Transformers in NLP</div>
-          <div class="item-sub">Online webinar on BERT, GPT, and fine-tuning strategies for domain-specific tasks.</div>
-          <span class="item-badge badge-green">2023</span>
-        </div>
-        <div class="item-card">
-          <div class="item-title">Talk on Research Writing & Publication</div>
-          <div class="item-sub">Workshop series on technical writing, journal selection, and the peer-review process.</div>
-          <span class="item-badge badge-green">2022</span>
-        </div>
-        <div class="item-card">
-          <div class="item-title">Webinar: Ethics in Artificial Intelligence</div>
-          <div class="item-sub">Panel discussion on bias, fairness, and responsible AI development practices.</div>
-          <span class="item-badge badge-green">2022</span>
-        </div>
-      </div>
+  <div class="exp-card">
+    <div>
+      <div class="exp-role">Teaching Assistant — Machine Learning</div>
+      <div class="exp-org">Department of Computer Science, Your University</div>
+      <div class="exp-desc">Assisted course instructor in lab sessions, prepared tutorial materials, and helped students with project implementations using Python and scikit-learn.</div>
+      <span class="item-badge badge-blue">PG Level</span>
     </div>
+    <div class="exp-period">Jul 2022 – Dec 2022</div>
   </div>
-
-  <!-- TAB 6: EXPERIENCE -->
-  <div class="tab-panel" id="tab-experience">
-    <div class="section-label">Professional journey</div>
-    <div class="section-title">Experience</div>
-    <div class="section-divider"></div>
-    <div class="exp-card">
-      <div>
-        <div class="exp-role">Research Scholar (Full-time)</div>
-        <div class="exp-org">Department of Computer Science, Your University</div>
-        <div class="exp-desc">Conducting doctoral research on [your topic]. Responsibilities include literature review, experimental design, data collection and analysis, paper writing, and presenting at academic forums.</div>
-        <span class="item-badge badge-blue">Current</span>
-      </div>
-      <div class="exp-period">2021 – Present</div>
+  <div class="exp-card">
+    <div>
+      <div class="exp-role">Lab Demonstrator — Python Programming</div>
+      <div class="exp-org">Department of Computer Science, Your University</div>
+      <div class="exp-desc">Guided first-year students through practical programming lab sessions covering Python fundamentals, data manipulation, and introductory data visualization.</div>
+      <span class="item-badge badge-blue">UG Level</span>
     </div>
-    <div class="exp-card">
-      <div>
-        <div class="exp-role">Junior Data Analyst (Intern)</div>
-        <div class="exp-org">Company / Organisation Name</div>
-        <div class="exp-desc">Performed exploratory data analysis, built dashboards in Tableau/Power BI, and supported the analytics team in predictive modelling projects using Python and SQL.</div>
-        <span class="item-badge badge-green">Internship</span>
-      </div>
-      <div class="exp-period">May 2020 – Aug 2020</div>
-    </div>
-    <div class="exp-card">
-      <div>
-        <div class="exp-role">Project Trainee</div>
-        <div class="exp-org">Research Lab / Institute Name</div>
-        <div class="exp-desc">Worked on a funded project involving dataset curation, model training, and evaluation. Contributed to a technical report submitted to the funding agency.</div>
-        <span class="item-badge badge-gold">Project</span>
-      </div>
-      <div class="exp-period">Jun 2019 – Dec 2019</div>
-    </div>
-    <div class="exp-card">
-      <div>
-        <div class="exp-role">Student Coordinator — Tech Fest</div>
-        <div class="exp-org">Your College Name</div>
-        <div class="exp-desc">Coordinated data science and coding events during the annual tech festival; managed participant registration, scheduling, and judging panels.</div>
-        <span class="item-badge badge-gold">Leadership</span>
-      </div>
-      <div class="exp-period">2018 – 2020</div>
-    </div>
+    <div class="exp-period">Jul 2021 – May 2022</div>
   </div>
+  <div class="exp-card">
+    <div>
+      <div class="exp-role">Mentor — Student Research Projects</div>
+      <div class="exp-org">Department of Computer Science, Your University</div>
+      <div class="exp-desc">Mentored 3rd and 4th year students on mini-projects involving data analysis, model building, and visualization using real-world datasets.</div>
+      <span class="item-badge badge-green">Mentoring</span>
+    </div>
+    <div class="exp-period">2022 – Present</div>
+  </div>
+</section>
 
-  <!-- TAB 7: PERSONAL PROFILE -->
-  <div class="tab-panel" id="tab-personal">
-    <div class="section-label">Beyond academics</div>
-    <div class="section-title">Personal Profile</div>
-    <div class="section-divider"></div>
-    <div class="personal-grid">
-      <div class="personal-card">
-        <h3>About me</h3>
-        <p>I am a curious and driven individual who finds joy in solving complex problems through the lens of data. I believe meaningful research should ultimately serve people and communities.</p>
+<!-- ── SECTION 5: TALKS ATTENDED ── -->
+<section class="page-section" id="talks">
+  <div class="section-label">Knowledge exchange</div>
+  <div class="section-title">Talks Attended</div>
+  <div class="section-divider"></div>
+  <div class="two-col">
+    <div>
+      <div class="col-label">Conferences & Seminars</div>
+      <div class="item-card">
+        <div class="item-title">International Conference on Machine Learning (ICML)</div>
+        <div class="item-sub">Attended keynotes and paper presentations on generative models and representation learning.</div>
+        <span class="item-badge badge-gold">2024</span>
       </div>
-      <div class="personal-card">
-        <h3>Values & approach</h3>
-        <p>I value intellectual rigor, collaboration, and continuous learning — approaching every challenge with patience, creativity, and a commitment to ethical, responsible data science.</p>
+      <div class="item-card">
+        <div class="item-title">National Conference on Data Science & AI</div>
+        <div class="item-sub">Participated as an attendee and presented a poster on your research topic.</div>
+        <span class="item-badge badge-gold">2023</span>
       </div>
-      <div class="personal-card">
-        <h3>Interests</h3>
-        <div class="interest-list">
-          <span class="interest-pill">📖 Reading</span>
-          <span class="interest-pill">✍️ Writing</span>
-          <span class="interest-pill">🎵 Music</span>
-          <span class="interest-pill">🌱 Nature</span>
-          <span class="interest-pill">♟️ Chess</span>
-          <span class="interest-pill">🎨 Art</span>
-          <span class="interest-pill">🧘 Yoga</span>
-          <span class="interest-pill">🌍 Travel</span>
-        </div>
+      <div class="item-card">
+        <div class="item-title">IEEE International Symposium on Big Data</div>
+        <div class="item-sub">Attended sessions on cloud data platforms, real-time analytics, and federated learning.</div>
+        <span class="item-badge badge-gold">2023</span>
       </div>
-      <div class="personal-card">
-        <h3>Languages</h3>
-        <div class="interest-list">
-          <span class="interest-pill">Malayalam (Native)</span>
-          <span class="interest-pill">English (Proficient)</span>
-          <span class="interest-pill">Hindi (Conversational)</span>
-        </div>
+      <div class="item-card">
+        <div class="item-title">International Symposium on AI in Healthcare</div>
+        <div class="item-sub">Sessions on medical imaging, predictive diagnostics, and ethical AI deployment.</div>
+        <span class="item-badge badge-gold">2022</span>
       </div>
-      <div class="personal-card" style="grid-column:1/-1;">
-        <h3>Goals</h3>
-        <p>I aspire to contribute meaningful research to the global data science community, mentor future scholars, and eventually lead independent research that addresses critical societal challenges through intelligent data systems.</p>
+    </div>
+    <div>
+      <div class="col-label">Guest Lectures & Webinars</div>
+      <div class="item-card">
+        <div class="item-title">Guest Lecture on Explainable AI</div>
+        <div class="item-sub">By Prof. Speaker Name, IIT / NIT · organised by Your University.</div>
+        <span class="item-badge badge-green">2024</span>
+      </div>
+      <div class="item-card">
+        <div class="item-title">Webinar: Transformers in NLP</div>
+        <div class="item-sub">Online webinar on BERT, GPT, and fine-tuning strategies for domain-specific tasks.</div>
+        <span class="item-badge badge-green">2023</span>
+      </div>
+      <div class="item-card">
+        <div class="item-title">Talk on Research Writing & Publication</div>
+        <div class="item-sub">Workshop series on technical writing, journal selection, and the peer-review process.</div>
+        <span class="item-badge badge-green">2022</span>
+      </div>
+      <div class="item-card">
+        <div class="item-title">Webinar: Ethics in Artificial Intelligence</div>
+        <div class="item-sub">Panel discussion on bias, fairness, and responsible AI development practices.</div>
+        <span class="item-badge badge-green">2022</span>
       </div>
     </div>
   </div>
+</section>
 
-</div><!-- /content-area -->
+<!-- ── SECTION 6: EXPERIENCE ── -->
+<section class="page-section" id="experience">
+  <div class="section-label">Professional journey</div>
+  <div class="section-title">Experience</div>
+  <div class="section-divider"></div>
+  <div class="exp-card">
+    <div>
+      <div class="exp-role">Research Scholar (Full-time)</div>
+      <div class="exp-org">Department of Data Science, IIT Palakkad</div>
+      <div class="exp-desc">Conducting doctoral research on Deep Modeling Techniques For Time Series Anomaly Detection. Responsibilities include literature review, experimental design, data collection and analysis, paper writing, and presenting at academic forums.</div>
+      <span class="item-badge badge-blue">Current</span>
+    </div>
+    <div class="exp-period">2021 – Present</div>
+  </div>
+  <div class="exp-card">
+    <div>
+      <div class="exp-role">Junior Data Analyst (Intern)</div>
+      <div class="exp-org">Company / Organisation Name</div>
+      <div class="exp-desc">Performed exploratory data analysis, built dashboards in Tableau/Power BI, and supported the analytics team in predictive modelling projects using Python and SQL.</div>
+      <span class="item-badge badge-green">Internship</span>
+    </div>
+    <div class="exp-period">May 2020 – Aug 2020</div>
+  </div>
+  <div class="exp-card">
+    <div>
+      <div class="exp-role">Project Trainee</div>
+      <div class="exp-org">Research Lab / Institute Name</div>
+      <div class="exp-desc">Worked on a funded project involving dataset curation, model training, and evaluation. Contributed to a technical report submitted to the funding agency.</div>
+      <span class="item-badge badge-gold">Project</span>
+    </div>
+    <div class="exp-period">Jun 2019 – Dec 2019</div>
+  </div>
+  <div class="exp-card">
+    <div>
+      <div class="exp-role">Student Coordinator — Tech Fest</div>
+      <div class="exp-org">Your College Name</div>
+      <div class="exp-desc">Coordinated data science and coding events during the annual tech festival; managed participant registration, scheduling, and judging panels.</div>
+      <span class="item-badge badge-gold">Leadership</span>
+    </div>
+    <div class="exp-period">2018 – 2020</div>
+  </div>
+</section>
+
+<!-- ── SECTION 7: PERSONAL PROFILE ── -->
+<section class="page-section" id="personal">
+  <div class="section-label">Beyond academics</div>
+  <div class="section-title">Personal Profile</div>
+  <div class="section-divider"></div>
+  <div class="personal-grid">
+    <div class="personal-card">
+      <h3>About me</h3>
+      <p>I am a curious and driven individual who finds joy in solving complex problems through the lens of data. I believe meaningful research should ultimately serve people and communities.</p>
+    </div>
+    <div class="personal-card">
+      <h3>Values & approach</h3>
+      <p>I value intellectual rigor, collaboration, and continuous learning — approaching every challenge with patience, creativity, and a commitment to ethical, responsible data science.</p>
+    </div>
+    <div class="personal-card">
+      <h3>Interests</h3>
+      <div class="interest-list">
+        <span class="interest-pill">📖 Reading</span>
+        <span class="interest-pill">✍️ Writing</span>
+        <span class="interest-pill">🎵 Music</span>
+        <span class="interest-pill">🌱 Nature</span>
+        <span class="interest-pill">♟️ Chess</span>
+        <span class="interest-pill">🎨 Art</span>
+        <span class="interest-pill">🧘 Yoga</span>
+        <span class="interest-pill">🌍 Travel</span>
+      </div>
+    </div>
+    <div class="personal-card">
+      <h3>Languages</h3>
+      <div class="interest-list">
+        <span class="interest-pill">Malayalam (Native)</span>
+        <span class="interest-pill">English (Proficient)</span>
+        <span class="interest-pill">Hindi (Conversational)</span>
+      </div>
+    </div>
+    <div class="personal-card" style="grid-column:1/-1;">
+      <h3>Goals</h3>
+      <p>I aspire to contribute meaningful research to the global data science community, mentor future scholars, and eventually lead independent research that addresses critical societal challenges through intelligent data systems.</p>
+    </div>
+  </div>
+</section>
 
 <footer>© 2026 Vinitha M Rajan · Data Science Research Scholar · All rights reserved</footer>
 
 <script>
-  function showTab(id, btn) {
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('tab-' + id).classList.add('active');
-    btn.classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+  // Highlight active nav link on scroll
+  const sections = document.querySelectorAll(".page-section");
+  const navLinks = document.querySelectorAll(".nav-link");
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove("active"));
+        const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+        if (active) {
+          active.classList.add("active");
+          active.scrollIntoView({behavior:"smooth", block:"nearest", inline:"center"});
+        }
+      }
+    });
+  }, { rootMargin: "-40% 0px -55% 0px" });
+  sections.forEach(s => observer.observe(s));
 
+  // Photo upload
   function loadPhoto(event) {
     const file = event.target.files[0];
     if (!file) return;
     const reader = new FileReader();
-    reader.onload = function(e) {
-      const img = document.getElementById('profilePhoto');
-      const placeholder = document.getElementById('photoPlaceholder');
-      img.src = e.target.result;
-      img.style.display = 'block';
-      placeholder.style.display = 'none';
-    };
+    reader.onload = e => { document.getElementById("profilePhoto").src = e.target.result; };
     reader.readAsDataURL(file);
   }
 </script>
