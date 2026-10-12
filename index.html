@@ -208,7 +208,7 @@
     <div class="header-left">
       <div class="greeting">PhD Scholar · IIT Palakkad</div>
       <h1>Vinitha <em>M</em> Rajan</h1>
-      <div class="header-role">Department of Data Science · <span>CGPA 9.75/10</span></div>
+      <div class="header-role">PhD Scholar · <span>Department of Data Science, IIT Palakkad</span></div>
       <p class="summary">PhD scholar with research interests in time-series analysis, anomaly detection, deep learning, and Explainable AI. My research focuses on developing reliable and interpretable learning methods for complex multivariate time-series data with applications in industrial and real-world systems.</p>
       <div class="header-badges">
         <span class="hbadge">⏱ Time Series Analysis</span>
@@ -229,7 +229,7 @@
     </div>
   </div>
   <!-- NAV inside header -->
-  <nav class="sticky-nav" id="mainNav" style="position:relative;top:auto;background:transparent;border-top:1px solid rgba(45,74,122,0.15);border-bottom:none;margin:0 -4rem;padding:0 4rem">
+  <nav class="sticky-nav header-nav" id="mainNav" style="position:relative;top:auto;background:transparent;border-top:1px solid rgba(45,74,122,0.15);border-bottom:none;margin:0 -4rem;padding:0 4rem">
     <a class="nav-link" href="#academic">🎓 Academic</a>
     <a class="nav-link" href="#publications">📄 Publications</a>
     <a class="nav-link" href="#research">🔬 Research</a>
@@ -245,7 +245,7 @@
 </header>
 
 <!-- STICKY NAV (fixed on scroll) -->
-<nav class="sticky-nav" id="fixedNav" style="display:none">
+<nav class="sticky-nav fixed-nav" id="fixedNav" style="display:none">
   <a class="nav-link" href="#academic">🎓 Academic</a>
   <a class="nav-link" href="#publications">📄 Publications</a>
   <a class="nav-link" href="#research">🔬 Research</a>
@@ -615,27 +615,31 @@
 <footer>© 2026 Vinitha M Rajan · PhD Scholar, Department of Data Science, IIT Palakkad · All rights reserved</footer>
 
 <script>
-  // Show fixed nav when header nav scrolls out of view
+  // Show/hide fixed nav
   const headerNav = document.getElementById('mainNav');
   const fixedNav  = document.getElementById('fixedNav');
-  const observer  = new IntersectionObserver(([e]) => {
+  new IntersectionObserver(([e]) => {
     fixedNav.style.display = e.isIntersecting ? 'none' : 'flex';
-  }, {threshold:0});
-  observer.observe(headerNav);
+  }, {threshold:0}).observe(headerNav);
 
-  // Highlight active section
-  const sections  = document.querySelectorAll('.page-section');
-  const navLinks  = document.querySelectorAll('.nav-link');
-  const secObs    = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        navLinks.forEach(l => l.classList.remove('active'));
-        const a = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
-        if (a) { a.classList.add('active'); a.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'}); }
-      }
+  // Highlight active nav link in fixed nav only (scroll-based)
+  const sections = document.querySelectorAll('.page-section');
+  const fixedLinks = document.querySelectorAll('.fixed-nav .nav-link');
+
+  function updateActive() {
+    let current = '';
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
     });
-  }, {rootMargin:'-40% 0px -55% 0px'});
-  sections.forEach(s => secObs.observe(s));
+    fixedLinks.forEach(l => {
+      l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+    });
+    // scroll active link into view inside nav
+    const active = document.querySelector('.fixed-nav .nav-link.active');
+    if (active) active.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+  }
+  window.addEventListener('scroll', updateActive, {passive:true});
+  updateActive();
 
   // Photo upload
   function loadPhoto(e) {
