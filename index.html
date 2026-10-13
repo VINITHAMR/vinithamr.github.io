@@ -43,11 +43,11 @@
     .header-badges{display:flex;gap:8px;flex-wrap:wrap}
     .hbadge{font-size:11px;padding:4px 12px;border-radius:20px;border:1px solid rgba(45,74,122,0.2);color:var(--teal);background:rgba(45,74,122,0.06)}
     .photo-wrap{flex-shrink:0}
-    .photo-box{width:130px;height:155px;border-radius:12px;border:2px solid rgba(45,74,122,0.25);overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.12);cursor:pointer;transition:transform .2s}
+    .photo-box{width:130px;height:155px;border-radius:12px;border:2px solid rgba(45,74,122,0.25);overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.12);transition:transform .2s}
     .photo-box:hover{transform:scale(1.03)}
     .photo-box img{width:100%;height:100%;object-fit:cover;display:block}
-    .change-lbl{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.6);color:#fff;font-size:10px;text-align:center;padding:4px 0;opacity:0;transition:opacity .2s}
-    .photo-box:hover .change-lbl{opacity:1}
+    
+    
     #photoInput{display:none}
 
     /* ── CONTACT BAR ── */
@@ -118,8 +118,8 @@
     .r-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.25rem;transition:transform .2s,box-shadow .2s;box-shadow:0 1px 4px rgba(0,0,0,0.05)}
     .r-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
     .r-icon{display:none}
-    .r-thumb{width:100%;border-radius:7px;margin-bottom:.8rem;overflow:hidden}
-    .r-thumb img{width:100%;height:auto;display:block;border-radius:7px}
+    
+    
     .r-card h3{font-size:14px;font-weight:600;color:#1c1a18;margin-bottom:4px}
     .r-card p{font-size:12.5px;color:var(--slate);line-height:1.65}
     .r-tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--green-l);color:var(--green);margin-top:8px;text-transform:uppercase;letter-spacing:.06em}
@@ -206,10 +206,9 @@
 <header>
   <div class="header-top">
     <div class="header-left">
-      <div class="greeting">PhD Scholar · IIT Palakkad</div>
       <h1>Vinitha <em>M</em> Rajan</h1>
       <div class="header-role">PhD Scholar · <span>Department of Data Science, IIT Palakkad</span></div>
-      <p class="summary">PhD scholar with research interests in time-series analysis, anomaly detection, deep learning, and Explainable AI. My research focuses on developing reliable and interpretable learning methods for complex multivariate time-series data with applications in industrial and real-world systems.</p>
+      <p class="summary">PhD scholar with research interests in time-series analysis, anomaly detection, deep learning, and Explainable AI. My research focuses on developing reliable and interpretable learning methods for complex multivariate time-series data with applications in industrial and real-world systems. My broader goal is to develop robust and explainable AI methods that combine technological advances in machine learning with practical solutions to challenging real-world problems.</p>
       <div class="header-badges">
         <span class="hbadge">⏱ Time Series Analysis</span>
         <span class="hbadge">📉 Anomaly Detection</span>
@@ -220,11 +219,9 @@
       </div>
     </div>
     <div class="photo-wrap" style="position:relative">
-      <input type="file" id="photoInput" accept="image/*" onchange="loadPhoto(event)"/>
-      <div class="photo-box" onclick="document.getElementById('photoInput').click()" title="Click to change photo" style="position:relative">
-        <img id="profilePhoto" src="photo.jpg" alt="Vinitha M Rajan"
-          onerror="this.src='https://ui-avatars.com/api/?name=Vinitha+M+Rajan&size=300&background=112240&color=64ffda&bold=true&font-size=0.33'"/>
-        <div class="change-lbl">Change photo</div>
+      <div class="photo-box" style="position:relative;cursor:default">
+        <img id="profilePhoto" src="entry.png" alt="Vinitha M Rajan"
+          onerror="this.style.opacity='0'"/>
       </div>
     </div>
   </div>
@@ -246,6 +243,7 @@
 
 <!-- STICKY NAV (fixed on scroll) -->
 <nav class="sticky-nav fixed-nav" id="fixedNav" style="display:none">
+  <a class="nav-link" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">🏠 Home</a>
   <a class="nav-link" href="#academic">🎓 Academic</a>
   <a class="nav-link" href="#publications">📄 Publications</a>
   <a class="nav-link" href="#research">🔬 Research</a>
@@ -350,7 +348,6 @@
       <span class="r-tag">Core focus</span>
     </div>
     <div class="r-card">
-      <div class="r-thumb"><img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgdmlld0JveD0iMCAwIDY4MCA0MDAiIHJvbGU9ImltZyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iNjgwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iIzFhMDUwNSIvPgogIDxjaXJjbGUgY3g9IjM0MCIgY3k9IjE4NSIgcj0iMTYwIiBmaWxsPSJub25lIiBzdHJva2U9IiM3YTAwMDAiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWRhc2hhcnJheT0iOCw2Ii8+CiAgPGNpcmNsZSBjeD0iMzQwIiBjeT0iMTg1IiByPSIxMzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2EwMDAwMCIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtZGFzaGFycmF5PSI2LDUiLz4KICA8Y2lyY2xlIGN4PSIzNDAiIGN5PSIxODUiIHI9IjEwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzgwMDAwIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogIDxjaXJjbGUgY3g9IjM0MCIgY3k9IjE4NSIgcj0iNzIiIGZpbGw9IiMyYTAwMDAiIHN0cm9rZT0iI2U1MzkzNSIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPGNpcmNsZSBjeD0iMzQwIiBjeT0iMTg1IiByPSI1OCIgZmlsbD0iIzNkMDAwMCIvPgogIDxwb2x5Z29uIHBvaW50cz0iMzQwLDEzMCAzMDAsMjAwIDM4MCwyMDAiIGZpbGw9IiNlNTM5MzUiIG9wYWNpdHk9IjAuMTUiLz4KICA8cG9seWdvbiBwb2ludHM9IjM0MCwxMzIgMzAzLDE5OCAzNzcsMTk4IiBmaWxsPSJub25lIiBzdHJva2U9IiNlNTM5MzUiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CiAgPHJlY3QgeD0iMzM2IiB5PSIxNDgiIHdpZHRoPSI4IiBoZWlnaHQ9IjI4IiByeD0iMyIgZmlsbD0iI2U1MzkzNSIvPgogIDxjaXJjbGUgY3g9IjM0MCIgY3k9IjE4NyIgcj0iNCIgZmlsbD0iI2U1MzkzNSIvPgogIDxnIHN0cm9rZT0iI2U1MzkzNSIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIwLjM1Ij4KICAgIDxsaW5lIHgxPSIzNDAiIHkxPSIxNSIgeDI9IjM0MCIgeTI9IjQwIi8+PGxpbmUgeDE9IjM0MCIgeTE9IjMzMCIgeDI9IjM0MCIgeTI9IjM1NSIvPgogICAgPGxpbmUgeDE9IjE3MCIgeTE9IjE4NSIgeDI9IjE5NSIgeTI9IjE4NSIvPjxsaW5lIHgxPSI0ODUiIHkxPSIxODUiIHgyPSI1MTAiIHkyPSIxODUiLz4KICAgIDxsaW5lIHgxPSIyMjYiIHkxPSI3MSIgeDI9IjI0NCIgeTI9Ijg5Ii8+PGxpbmUgeDE9IjQ1NCIgeTE9IjI5OSIgeDI9IjQzNiIgeTI9IjI4MSIvPgogIDwvZz4KICA8cmVjdCB4PSI0MCIgeT0iNjAiIHdpZHRoPSIyMDAiIGhlaWdodD0iOTAiIHJ4PSI2IiBmaWxsPSIjMmEwMDAwIiBzdHJva2U9IiM3YTAwMDAiIHN0cm9rZS13aWR0aD0iMC41Ii8+CiAgPHJlY3QgeD0iNDAiIHk9IjYwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIyIiByeD0iNiIgZmlsbD0iIzdhMDAwMCIvPgogIDx0ZXh0IHg9IjE0MCIgeT0iNzYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSIjZmZjY2NjIj5TWVNURU0gU1RBVFVTPC90ZXh0PgogIDxjaXJjbGUgY3g9IjYwIiBjeT0iMTAxIiByPSI1IiBmaWxsPSIjZTUzOTM1Ii8+PHRleHQgeD0iNzQiIHk9IjEwNSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGZpbGw9IiNmZmFhYWEiPlRocmVzaG9sZCBicmVhY2hlZDwvdGV4dD4KICA8Y2lyY2xlIGN4PSI2MCIgY3k9IjEyMSIgcj0iNSIgZmlsbD0iI2U1MzkzNSIvPjx0ZXh0IHg9Ijc0IiB5PSIxMjUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBmaWxsPSIjZmZhYWFhIj5QYXR0ZXJuIGRldmlhdGlvbjwvdGV4dD4KICA8Y2lyY2xlIGN4PSI2MCIgY3k9IjE0MSIgcj0iNSIgZmlsbD0iI2ZmNmI2YiIvPjx0ZXh0IHg9Ijc0IiB5PSIxNDUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBmaWxsPSIjZmZhYWFhIj5Nb2RlbCBjb25maWRlbmNlIGRvd248L3RleHQ+CiAgPHJlY3QgeD0iNDQwIiB5PSI2MCIgd2lkdGg9IjIwMCIgaGVpZ2h0PSI5MCIgcng9IjYiIGZpbGw9IiMyYTAwMDAiIHN0cm9rZT0iIzdhMDAwMCIgc3Ryb2tlLXdpZHRoPSIwLjUiLz4KICA8cmVjdCB4PSI0NDAiIHk9IjYwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIyIiByeD0iNiIgZmlsbD0iIzdhMDAwMCIvPgogIDx0ZXh0IHg9IjU0MCIgeT0iNzYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSIjZmZjY2NjIj5BTk9NQUxZIFNDT1JFPC90ZXh0PgogIDx0ZXh0IHg9IjU0MCIgeT0iMTEwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyOCIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iI2U1MzkzNSI+OS43PC90ZXh0PgogIDx0ZXh0IHg9IjU0MCIgeT0iMTMwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgZmlsbD0iI2ZmODg4OCI+LyAxMC4wICAgQ1JJVElDQUw8L3RleHQ+CiAgPHJlY3QgeD0iNDYwIiB5PSIxMzgiIHdpZHRoPSIxNjAiIGhlaWdodD0iNiIgcng9IjMiIGZpbGw9IiM1YTAwMDAiLz4KICA8cmVjdCB4PSI0NjAiIHk9IjEzOCIgd2lkdGg9IjE1NSIgaGVpZ2h0PSI2IiByeD0iMyIgZmlsbD0iI2U1MzkzNSIvPgogIDxyZWN0IHg9IjEwMCIgeT0iMjcwIiB3aWR0aD0iNDgwIiBoZWlnaHQ9IjYwIiByeD0iNiIgZmlsbD0iIzIwMDAwMCIgc3Ryb2tlPSIjNWEwMDAwIiBzdHJva2Utd2lkdGg9IjAuNSIvPgogIDx0ZXh0IHg9IjExOCIgeT0iMjg3IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMCIgZmlsbD0iI2FhNTU1NSI+TGl2ZSBzaWduYWw8L3RleHQ+CiAgPHBvbHlsaW5lIHBvaW50cz0iMTIwLDMxNSAxNDUsMzEyIDE2NSwzMTYgMTg1LDMxMSAyMDUsMzE0IDIyNSwzMTIgMjQ1LDMxNSAyNjUsMzExIDI4MCwzMTMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdhMzAzMCIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8cG9seWxpbmUgcG9pbnRzPSIyODAsMzEzIDI5MCwyNzUgMzAwLDMxMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZTUzOTM1IiBzdHJva2Utd2lkdGg9IjIiLz4KICA8Y2lyY2xlIGN4PSIyOTAiIGN5PSIyNzUiIHI9IjQiIGZpbGw9IiNlNTM5MzUiIHN0cm9rZT0iI2ZmODg4OCIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPHBvbHlsaW5lIHBvaW50cz0iMzAwLDMxMyAzNDAsMzExIDM4MCwzMTIgNDIwLDMxMiA0NjUsMzExIDUyMCwzMTIgNTYwLDMxNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjN2EzMDMwIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogIDxsaW5lIHgxPSIxMjAiIHkxPSIzMDAiIHgyPSI1NjAiIHkyPSIzMDAiIHN0cm9rZT0iI2U1MzkzNSIgc3Ryb2tlLXdpZHRoPSIwLjc1IiBzdHJva2UtZGFzaGFycmF5PSI0LDMiIG9wYWNpdHk9IjAuNSIvPgogIDxyZWN0IHg9IjI1OCIgeT0iMzQwIiB3aWR0aD0iMTY0IiBoZWlnaHQ9IjMyIiByeD0iNiIgZmlsbD0iI2U1MzkzNSIvPgogIDx0ZXh0IHg9IjM0MCIgeT0iMzYxIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0id2hpdGUiIGxldHRlci1zcGFjaW5nPSI0Ij5BTEVSVDwvdGV4dD4KPC9zdmc+" alt="Anomaly Detection thumbnail"/></div>
       <h3>Anomaly Detection</h3>
       <p>Detecting unusual patterns in multivariate time-series from cyber-physical systems using unsupervised deep learning and graph-based models.</p>
       <span class="r-tag">Core focus</span>
@@ -607,8 +604,8 @@
     <div class="p-card"><h3>About me</h3><p>A curious and driven researcher who finds joy in solving complex problems through data. Committed to building AI that is not only powerful but also interpretable, fair, and socially responsible.</p></div>
     <div class="p-card"><h3>Date of Birth</h3><p>10 April 1986 · Indian</p></div>
     <div class="p-card"><h3>Languages Known</h3><div class="interest-list"><span class="interest-pill">Malayalam</span><span class="interest-pill">English</span><span class="interest-pill">Hindi</span><span class="interest-pill">Tamil</span><span class="interest-pill">Telugu</span></div></div>
+    <div class="p-card"><h3>Contact</h3><p>📧 <a href="mailto:vinithamr.nitc@gmail.com" style="color:var(--teal2);text-decoration:none">vinithamr.nitc@gmail.com</a><br>📞 <a href="tel:+919446382600" style="color:var(--teal2);text-decoration:none">+91 9446382600</a></p></div>
     <div class="p-card"><h3>Address</h3><p>Aswathi (H), Anickadu P.O., Kottayam, Kerala, India — 686503</p></div>
-    <div class="p-card" style="grid-column:1/-1"><h3>Research Goal</h3><p>To develop robust and explainable AI methods that combine technological advances in machine learning with practical solutions to challenging real-world problems — and to mentor future researchers in their journey toward impactful data science.</p></div>
   </div>
 </section>
 
@@ -641,14 +638,6 @@
   window.addEventListener('scroll', updateActive, {passive:true});
   updateActive();
 
-  // Photo upload
-  function loadPhoto(e) {
-    const f = e.target.files[0];
-    if (!f) return;
-    const r = new FileReader();
-    r.onload = ev => { document.getElementById('profilePhoto').src = ev.target.result; };
-    r.readAsDataURL(f);
-  }
 </script>
 </body>
 </html>
