@@ -3,640 +3,461 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Vinitha M Rajan — Data Science Research Scholar</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet"/>
+  <title>Vinitha M Rajan</title>
+  
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
-      --navy:#ffffff;--navy2:#f7f8fa;--navy3:#eef0f4;
-      --teal:#2d4a7a;--teal2:#4a73b0;
-      --slate:#504d47;--light:#1c1a18;--white:#1c1a18;
-      --green:#0d6e56;--green-l:#e3f2ec;
-      --gold:#b8860b;--gold-l:#fdf6e3;
-      --red:#e53935;--red-l:#ffeaea;
-      --border:rgba(28,26,24,0.1);
-      --shadow:0 4px 24px rgba(0,0,0,0.08);
+      --navy:#2d4a7a;
+      --link:#2d6fa8;
+      --text:#222;
+      --muted:#555;
+      --light:#777;
+      --border:#ddd;
+      --bg:#fff;
+      --sidebar-bg:#f4f7fb;
     }
-    html{scroll-behavior:smooth}
-    body{font-family:'Inter',sans-serif;background:#ffffff;color:var(--slate);line-height:1.7}
+    html{font-size:15px}
+    body{font-family:Georgia,'Palatino Linotype',Palatino,serif;background:var(--bg);color:var(--text);line-height:1.75}
+    a{color:var(--link);text-decoration:none}
+    a:hover{text-decoration:underline}
 
-    /* ── HEADER ── */
-    header{
-      background:linear-gradient(135deg,#f0f4fa 0%,#e8eef6 60%,#dce6f5 100%);
-      padding:3rem 4rem 0;position:relative;overflow:hidden;
-      border-bottom:1px solid var(--border);
-    }
-    header::before{
-      content:'';position:absolute;top:-100px;right:-100px;
-      width:500px;height:500px;border-radius:50%;
-      background:radial-gradient(circle,rgba(45,74,122,0.06) 0%,transparent 70%);
-      pointer-events:none;
-    }
-    .header-top{display:flex;align-items:flex-start;gap:2rem;margin-bottom:2rem}
-    .header-left{flex:1}
-    .greeting{font-size:13px;color:var(--teal);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.5rem;font-weight:600}
-    .header-left h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);color:#1c1a18;line-height:1.1;margin-bottom:.5rem}
-    .header-left h1 em{font-style:italic;color:var(--teal2)}
-    .header-role{font-size:14px;color:var(--slate);margin-bottom:1rem;font-weight:500}
-    .header-role span{color:var(--teal);font-weight:600}
-    .summary{font-size:14px;color:#504d47;max-width:620px;line-height:1.8;margin-bottom:1.25rem}
-    .header-badges{display:flex;gap:8px;flex-wrap:wrap}
-    .hbadge{font-size:11px;padding:4px 12px;border-radius:20px;border:1px solid rgba(45,74,122,0.2);color:var(--teal);background:rgba(45,74,122,0.06)}
-    .photo-wrap{flex-shrink:0}
-    .photo-box{width:130px;height:155px;border-radius:12px;border:2px solid rgba(45,74,122,0.25);overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.12);transition:transform .2s}
-    .photo-box:hover{transform:scale(1.03)}
-    .photo-box img{width:100%;height:100%;object-fit:cover;display:block}
-    
-    
-    #photoInput{display:none}
+    /* ── LAYOUT ── */
+    .page{display:flex;min-height:100vh;max-width:1060px;margin:0 auto;padding:0}
 
-    /* ── CONTACT BAR ── */
-    .contact-bar{
-      display:flex;gap:0;flex-wrap:wrap;
-      border-top:1px solid var(--border);
-      margin-top:0;
+    /* ── SIDEBAR ── */
+    .sidebar{
+      width:220px;flex-shrink:0;
+      background:var(--sidebar-bg);
+      border-right:1px solid var(--border);
+      padding:2rem 1.25rem;
+      display:flex;flex-direction:column;
+      position:sticky;top:0;height:100vh;overflow-y:auto;
     }
-    .clink{
-      display:inline-flex;align-items:center;gap:7px;
-      padding:10px 20px;font-size:12.5px;color:var(--slate);
-      text-decoration:none;border-right:1px solid var(--border);
-      transition:color .2s,background .2s;
-    }
-    .clink:last-child{border-right:none}
-    .clink:hover{color:var(--teal);background:rgba(45,74,122,0.05)}
+    .sidebar::-webkit-scrollbar{width:3px}
+    .sidebar::-webkit-scrollbar-thumb{background:#ccc}
 
-    /* ── STICKY NAV ── */
-    .sticky-nav{
-      position:sticky;top:0;z-index:100;
-      background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);
-      border-bottom:1px solid var(--border);
-      display:flex;overflow-x:auto;scrollbar-width:none;
+    .photo-wrap{margin-bottom:1.1rem;text-align:center}
+    .photo-wrap img{
+      width:150px;height:165px;object-fit:cover;
+      border:1px solid var(--border);display:block;margin:0 auto;
     }
-    .sticky-nav::-webkit-scrollbar{display:none}
-    .nav-link{
-      flex-shrink:0;padding:14px 18px;font-size:12.5px;
-      color:var(--slate);text-decoration:none;white-space:nowrap;
-      border-bottom:2px solid transparent;transition:all .2s;
-      display:flex;align-items:center;gap:6px;
+    .sidebar-name{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:2px;text-align:center}
+    .sidebar-role{font-size:12px;color:var(--muted);text-align:center;margin-bottom:1.25rem;line-height:1.5}
+
+    .sidebar-nav{border-top:1px solid var(--border);padding-top:1rem;margin-bottom:1rem}
+    .sidebar-nav a{
+      display:block;font-size:13px;color:var(--link);
+      padding:4px 0;border-bottom:none;
     }
-    .nav-link:hover{color:var(--teal);background:rgba(45,74,122,0.05)}
-    .nav-link.active{color:var(--teal);border-bottom-color:var(--teal);font-weight:600}
+    .sidebar-nav a:hover{text-decoration:underline}
+    .sidebar-nav a.active{font-weight:700;color:var(--navy)}
+
+    .sidebar-contact{font-size:12px;color:var(--muted);line-height:1.9;border-top:1px solid var(--border);padding-top:.9rem}
+    .sidebar-contact a{color:var(--link);font-size:12px}
+
+    /* ── MAIN ── */
+    .main{flex:1;padding:2.5rem 2.75rem;min-width:0}
+
+    /* ── NAME HEADER ── */
+    .main-header{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+    .main-header h1{font-size:1.9rem;font-weight:700;color:var(--text);margin-bottom:.25rem}
+    .main-header .role{font-size:14px;color:var(--muted);margin-bottom:.4rem}
+    .main-header .inst a{font-size:14px;color:var(--link)}
+    .main-header .summary{font-size:14px;color:var(--muted);margin-top:.75rem;line-height:1.8;max-width:680px}
 
     /* ── SECTIONS ── */
-    .page-section{padding:4rem;border-bottom:1px solid var(--border)}
-    .page-section:nth-child(even){background:#f7f8fa}
-    .sec-label{font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:4px}
-    .sec-title{font-family:'Playfair Display',serif;font-size:1.8rem;color:#1c1a18;margin-bottom:.5rem}
-    .sec-bar{width:40px;height:2px;background:var(--teal);border-radius:2px;margin-bottom:2rem}
+    .section{margin-bottom:2.25rem}
+    .section h2{
+      font-size:.85rem;font-weight:700;text-transform:uppercase;
+      letter-spacing:.1em;color:var(--navy);
+      border-bottom:1px solid var(--border);
+      padding-bottom:.3rem;margin-bottom:.9rem;
+    }
 
-    /* ── ACADEMIC ── */
-    .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    .edu-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.25rem 1.4rem;border-left:3px solid var(--teal);box-shadow:0 1px 4px rgba(0,0,0,0.05)}
-    .edu-degree{font-size:15px;font-weight:600;color:#1c1a18;margin-bottom:2px}
-    .edu-field{font-size:13px;color:var(--teal2);margin-bottom:3px}
-    .edu-inst{font-size:12.5px;color:var(--slate)}
-    .edu-meta{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
-    .edu-year{font-size:11px;padding:2px 9px;border-radius:20px;background:rgba(45,74,122,0.07);color:var(--teal);font-weight:600;border:1px solid rgba(45,74,122,0.2)}
-    .edu-cgpa{font-size:11px;padding:2px 9px;border-radius:20px;background:rgba(201,168,76,0.1);color:var(--gold);font-weight:600;border:1px solid rgba(201,168,76,0.25)}
+    /* ── LISTS ── */
+    ul.plain{list-style:none;padding:0}
+    ul.plain li{font-size:14px;color:var(--text);margin-bottom:.4rem;padding-left:1rem;position:relative}
+    ul.plain li::before{content:"·";position:absolute;left:0;color:var(--navy);font-weight:700}
 
-    /* ── PUBLICATIONS ── */
-    .pub-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.4rem 1.5rem;margin-bottom:14px;border-left:3px solid var(--teal2);box-shadow:0 1px 4px rgba(0,0,0,0.05)}
-    .pub-card:last-child{margin-bottom:0}
-    .pub-title{font-size:14px;font-weight:600;color:#1c1a18;margin-bottom:5px;line-height:1.5}
-    .pub-meta{font-size:12.5px;color:var(--slate);line-height:1.6}
-    .pub-meta a{color:var(--teal2);text-decoration:none}
-    .pub-meta a:hover{text-decoration:underline}
-    .pub-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 9px;border-radius:20px;margin-top:8px;text-transform:uppercase;letter-spacing:.05em}
-    .badge-teal{background:rgba(45,74,122,0.07);color:var(--teal);border:1px solid rgba(45,74,122,0.2)}
-    .badge-gold{background:var(--gold-l);color:var(--gold)}
-    .badge-green{background:var(--green-l);color:var(--green)}
-    .badge-red{background:var(--red-l);color:var(--red)}
-    .badge-blue{background:rgba(74,115,176,0.1);color:var(--teal2);border:1px solid rgba(74,115,176,0.2)}
+    ul.disc{padding-left:1.4rem;margin-top:.3rem}
+    ul.disc li{font-size:13.5px;color:var(--muted);margin-bottom:.3rem}
 
-    /* ── RESEARCH ── */
-    .research-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
-    .r-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.25rem;transition:transform .2s,box-shadow .2s;box-shadow:0 1px 4px rgba(0,0,0,0.05)}
-    .r-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
-    .r-icon{display:none}
-    
-    
-    .r-card h3{font-size:14px;font-weight:600;color:#1c1a18;margin-bottom:4px}
-    .r-card p{font-size:12.5px;color:var(--slate);line-height:1.65}
-    .r-tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--green-l);color:var(--green);margin-top:8px;text-transform:uppercase;letter-spacing:.06em}
+    /* ── ENTRY (two-col role+period) ── */
+    .entry{margin-bottom:1.1rem}
+    .entry-header{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:.5rem}
+    .entry-title{font-size:14px;font-weight:700;color:var(--text)}
+    .entry-period{font-size:12.5px;color:var(--light);white-space:nowrap}
+    .entry-sub{font-size:13.5px;color:var(--link);margin-bottom:.2rem}
+    .entry-desc{font-size:13.5px;color:var(--muted);line-height:1.7}
+    .entry-desc ul{padding-left:1.2rem;margin-top:.3rem}
+    .entry-desc li{margin-bottom:.25rem}
 
-    /* ── PROJECTS ── */
-    .proj-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.4rem 1.5rem;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,0.05)}
-    .proj-card:last-child{margin-bottom:0}
-    .proj-header{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:.6rem;flex-wrap:wrap}
-    .proj-title{font-size:15px;font-weight:600;color:#1c1a18}
-    .proj-period{font-size:11px;color:var(--slate);background:#eef0f4;padding:3px 10px;border-radius:20px;white-space:nowrap;font-weight:600}
-    .proj-desc{font-size:13px;color:var(--slate);line-height:1.7}
-    .proj-desc ul{padding-left:1.2rem;margin-top:.5rem}
-    .proj-desc li{margin-bottom:.3rem}
+    /* ── PUB ── */
+    .pub{margin-bottom:1rem;padding-left:.9rem;border-left:2px solid var(--border)}
+    .pub-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px}
+    .pub-meta{font-size:13px;color:var(--muted)}
+    .pub-meta a{color:var(--link)}
 
-    /* ── TWO-COL ── */
-    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem}
-    .col-lbl{font-size:11px;font-weight:700;color:#9c9890;text-transform:uppercase;letter-spacing:.08em;margin-bottom:1rem;padding-bottom:6px;border-bottom:1px solid var(--border)}
+    /* ── COURSES TABLE ── */
+    .course-table{width:100%;border-collapse:collapse;font-size:13.5px}
+    .course-table th{text-align:left;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--light);border-bottom:1px solid var(--border);padding:.3rem .5rem}
+    .course-table td{padding:.35rem .5rem;color:var(--text);border-bottom:1px solid #f0f0f0}
+    .course-table tr:last-child td{border-bottom:none}
 
-    /* ── TIMELINE ── */
-    .timeline{position:relative;padding-left:22px}
-    .timeline::before{content:'';position:absolute;left:6px;top:6px;bottom:6px;width:1px;background:var(--border)}
-    .tl-item{position:relative;margin-bottom:1.4rem}
-    .tl-item:last-child{margin-bottom:0}
-    .tl-dot{position:absolute;left:-19px;top:5px;width:9px;height:9px;border-radius:50%;background:var(--teal);border:2px solid #fff}
-    .tl-meta{display:flex;gap:8px;align-items:center;margin-bottom:3px;flex-wrap:wrap}
-    .tl-year{font-size:10px;font-weight:700;color:var(--teal);background:rgba(45,74,122,0.07);padding:2px 8px;border-radius:20px;border:1px solid rgba(45,74,122,0.2)}
-    .tl-type{font-size:10px;color:var(--slate);text-transform:uppercase;letter-spacing:.06em}
-    .tl-title{font-size:13.5px;font-weight:600;color:#1c1a18;margin-bottom:2px}
-    .tl-sub{font-size:12.5px;color:var(--slate)}
-    .tl-sub span{color:var(--gold);font-weight:600}
+    /* ── BADGES ── */
+    .badge{display:inline-block;font-size:11px;padding:1px 8px;border-radius:3px;margin-left:6px;font-weight:400}
+    .badge-pub{background:#e8f0fb;color:var(--navy)}
+    .badge-review{background:#e8f5ec;color:#1b5e42}
+    .badge-award{background:#fdf6e3;color:#b8860b}
 
-    /* ── ITEM CARDS ── */
-    .item-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:1rem 1.2rem;margin-bottom:11px;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
-    .item-card:last-child{margin-bottom:0}
-    .item-title{font-size:13.5px;font-weight:600;color:#1c1a18;margin-bottom:3px}
-    .item-sub{font-size:12px;color:var(--slate);line-height:1.6}
-
-    /* ── EXP CARDS ── */
-    .exp-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.4rem 1.5rem;margin-bottom:14px;display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:start;box-shadow:0 1px 4px rgba(0,0,0,0.05)}
-    .exp-card:last-child{margin-bottom:0}
-    .exp-role{font-size:15px;font-weight:600;color:#1c1a18;margin-bottom:2px}
-    .exp-org{font-size:13px;color:var(--teal2);margin-bottom:6px}
-    .exp-desc{font-size:13px;color:var(--slate);line-height:1.65}
-    .exp-period{font-size:11px;color:var(--slate);white-space:nowrap;background:#eef0f4;padding:3px 10px;border-radius:20px;font-weight:600}
-
-    /* ── SKILLS ── */
-    .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
-    .skill-grp{background:#fff;border:1px solid var(--border);border-radius:10px;padding:1rem 1.2rem;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
-    .skill-grp-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--teal);margin-bottom:8px}
-    .skill-pills{display:flex;flex-wrap:wrap;gap:6px}
-    .skill-pill{font-size:12px;padding:3px 11px;border-radius:20px;background:#f0f2f5;color:#1c1a18;border:1px solid var(--border)}
-
-    /* ── PERSONAL ── */
-    .personal-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
-    .p-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.3rem;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
-    .p-card h3{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--teal);margin-bottom:8px}
-    .p-card p{font-size:13.5px;color:var(--slate);line-height:1.7}
-    .interest-list{display:flex;flex-wrap:wrap;gap:7px}
-    .interest-pill{font-size:12px;padding:4px 12px;border-radius:20px;background:#f0f2f5;color:#1c1a18;border:1px solid var(--border)}
-
-    /* ── ACHIEVEMENTS ── */
-    .achieve-list{display:flex;flex-direction:column;gap:10px}
-    .achieve-item{background:#fff;border:1px solid var(--border);border-radius:10px;padding:.9rem 1.2rem;display:flex;align-items:flex-start;gap:12px;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
-    .achieve-num{width:28px;height:28px;border-radius:50%;background:rgba(45,74,122,0.07);border:1px solid rgba(45,74,122,0.2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--teal);flex-shrink:0}
-    .achieve-text{font-size:13.5px;color:var(--light);line-height:1.6}
+    /* ── AREAS ── */
+    .areas{display:flex;flex-wrap:wrap;gap:6px;margin-top:.5rem}
+    .area-tag{font-size:12.5px;padding:3px 12px;border:1px solid var(--border);border-radius:3px;color:var(--muted)}
 
     /* ── FOOTER ── */
-    footer{text-align:center;padding:1.5rem;font-size:12px;background:#2d4a7a;color:rgba(255,255,255,0.55);border-top:1px solid var(--border)}
+    footer{border-top:1px solid var(--border);padding:1rem 2.75rem;font-size:12px;color:var(--light);background:var(--bg)}
 
     @media(max-width:720px){
-      header{padding:2rem 1.25rem 0}
-      .page-section{padding:2.5rem 1.25rem}
-      .edu-grid,.two-col,.personal-grid{grid-template-columns:1fr}
-      .exp-card{grid-template-columns:1fr}
-      .header-top{flex-direction:column}
-      .header-badges{justify-content:flex-start}
-      .photo-wrap{align-self:center}
+      .page{flex-direction:column}
+      .sidebar{width:100%;height:auto;position:static;flex-direction:row;flex-wrap:wrap;gap:1.5rem;padding:1.25rem}
+      .photo-wrap{margin-bottom:0}
+      .main{padding:1.5rem}
     }
   </style>
 </head>
 <body>
+<div class="page">
 
-<!-- HEADER -->
-<header>
-  <div class="header-top">
-    <div class="header-left">
-      <h1>Vinitha <em>M</em> Rajan</h1>
-      <!-- <div class="header-role">PhD Scholar · <span>Department of Data Science, IIT Palakkad</span></div> -->
-      <div class="header-role"><span>Department of Data Science, IIT Palakkad</span></div>
-      <p class="summary">PhD scholar with research interests in time-series analysis, anomaly detection, deep learning, and Explainable AI. My research focuses on developing reliable and interpretable learning methods for complex multivariate time-series data with applications in industrial and real-world systems. My broader goal is to develop robust and explainable AI methods that combine technological advances in machine learning with practical solutions to challenging real-world problems — and to mentor future researchers in their journey toward impactful data science.</p>
-      <div class="header-badges">
-        <span class="hbadge">⏱ Time Series Analysis</span>
-        <span class="hbadge">📉 Anomaly Detection</span>
-        <span class="hbadge">🧠 Deep Learning</span>
-        <span class="hbadge">🔍 Explainable AI</span>
-        <span class="hbadge">📊 Data Analytics</span>
-        <span class="hbadge">✍ Text Mining</span>
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+    <div class="photo-wrap">
+      <!-- Replace entry.png with your actual photo filename -->
+      <img src="entry.png" alt="Vinitha M Rajan"
+        onerror="this.style.background='#e8eef6';this.style.minHeight='165px'"/>
+    </div>
+    <div class="sidebar-name">Vinitha M Rajan</div>
+    <div class="sidebar-role">PhD Scholar<br><a href="https://mfsdsai.iitpkd.ac.in/" target="_blank" style="color:var(--link)">Dept. of Data Science</a><br>IIT Palakkad</div>
+
+    <nav class="sidebar-nav">
+      <a href="#home" class="active">Home</a>
+      <a href="#academic">Academic Profile</a>
+      <a href="#publications">Publications</a>
+      <a href="#projects">Research Projects</a>
+      <a href="#teaching">Teaching</a>
+      <a href="#workshops">Workshops</a>
+      <a href="#researchgroup">Research Group</a>
+      <a href="#posters">Poster Presentations</a>
+      <a href="#talks">Talks Attended</a>
+      <a href="#experience">Experience</a>
+      <a href="#achievements">Achievements</a>
+      <a href="#personal">Personal</a>
+    </nav>
+
+    <div class="sidebar-contact">
+      <a href="mailto:112114001@smail.iitpkd.ac.in">112114001@smail.iitpkd.ac.in</a><br>
+      <a href="mailto:vinithamr.nitc@gmail.com">vinithamr.nitc@gmail.com</a><br>
+      <a href="tel:+919446382600">+91 9446382600</a><br><br>
+      <a href="https://github.com/Vinitha-M-R" target="_blank">GitHub</a> &nbsp;·&nbsp;
+      <a href="https://linkedin.com/in/vinitha-m-rajan/" target="_blank">LinkedIn</a>
+    </div>
+  </aside>
+
+  <!-- ── MAIN ── -->
+  <main class="main">
+
+    <!-- NAME HEADER -->
+    <div class="main-header" id="home">
+      <h1>Vinitha M Rajan</h1>
+
+      <div class="inst">
+        <a href="https://mfsdsai.iitpkd.ac.in/" target="_blank">Department of Data Science</a>, <a href="https://iitpkd.ac.in/" target="_blank">IIT Palakkad</a><br>
+        Member, <a href="https://mlgiitpkd.github.io/" target="_blank">Palakkad Machine Learning Group (MLG)</a><br>
+        Supervised by <a href="https://sahelybhadra.github.io/" target="_blank">Dr. Sahely Bhadra</a>
+      </div>
+      <p class="summary">
+        PhD scholar with research interests in time-series analysis, anomaly detection, deep learning, and Explainable AI.
+        My research focuses on developing reliable and interpretable learning methods for complex multivariate time-series data
+        with applications in industrial and real-world systems. My broader goal is to develop robust and explainable AI methods
+        that combine technological advances in machine learning with practical solutions to challenging real-world problems.
+      </p>
+    </div>
+
+    <!-- RESEARCH AREAS -->
+    <div class="section">
+      <h2>Areas of Interest</h2>
+      <div class="areas">
+        <span class="area-tag">Time Series Analysis</span>
+        <span class="area-tag">Anomaly Detection</span>
+        <span class="area-tag">Deep Learning</span>
+        <span class="area-tag">Explainable AI</span>
+        <span class="area-tag">Data Analytics</span>
+        <span class="area-tag">Ethical AI</span>
+        <span class="area-tag">Text Mining</span>
       </div>
     </div>
-    <div class="photo-wrap" style="position:relative">
-      <div class="photo-box" style="position:relative;cursor:default">
-        <img id="profilePhoto" src="vinithamr.jpg" alt="Vinitha M Rajan"
-          onerror="this.style.opacity='0'"/>
+
+    <!-- ACADEMIC PROFILE -->
+    <div class="section" id="academic">
+      <h2>Academic Profile</h2>
+      <div class="entry">
+        <div class="entry-header"><div class="entry-title">PhD Scholar — Department of Data Science</div><div class="entry-period">2021 – Present</div></div>
+        <div class="entry-sub">Indian Institute of Technology Palakkad, Kerala &nbsp;·&nbsp; CGPA: 9.75/10</div>
+        <div class="entry-desc">Thesis: <em>Deep Modeling Techniques for Time Series Anomaly Detection</em> &nbsp;·&nbsp; Supervisor: Dr. Sahely Bhadra</div>
+      </div>
+      <div class="entry">
+        <div class="entry-header"><div class="entry-title">M.Tech — Computer Science &amp; Engineering</div><div class="entry-period">2017 – 2019</div></div>
+        <div class="entry-sub">College of Engineering Trivandrum &nbsp;·&nbsp; CGPA: 9.47/10</div>
+      </div>
+      <div class="entry">
+        <div class="entry-header"><div class="entry-title">B.Tech — Computer Science &amp; Engineering</div><div class="entry-period">2004 – 2008</div></div>
+        <div class="entry-sub">National Institute of Technology Calicut &nbsp;·&nbsp; CGPA: 8.48/10</div>
+      </div>
+
+      <h2 style="margin-top:1.5rem">PhD Coursework &nbsp;<span style="font-size:12px;font-weight:400;text-transform:none;letter-spacing:0;color:var(--light)">Total Credits: 16 &nbsp;·&nbsp; CGPA: 9.75</span></h2>
+      <table class="course-table">
+        <thead><tr><th>Course</th><th>Title</th><th>Grade</th></tr></thead>
+        <tbody>
+          <tr><td>CS5512</td><td>Machine Learning</td><td>S</td></tr>
+          <tr><td>CS5011</td><td>Optimization</td><td>S</td></tr>
+          <tr><td>CS5007</td><td>Deep Learning</td><td>S</td></tr>
+          <tr><td>CS6006</td><td>Responsible AI</td><td>S</td></tr>
+          <tr><td>MA5007</td><td>Probability &amp; Statistics</td><td>A</td></tr>
+          <tr><td>GN6001</td><td>Research Methodology</td><td>P</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- PUBLICATIONS -->
+    <div class="section" id="publications">
+      <h2>Publications</h2>
+      <div class="pub">
+        <div class="pub-title">HEIGHTS: Hierarchical Graph Structure Learning for Time Series Anomaly Detection <span class="badge badge-pub">Journal 2026</span></div>
+        <div class="pub-meta">Vinitha M Rajan, Sahely Bhadra · <em>Journal of Neurocomputing</em>, Vol. 671, 2026, 132638<br>
+        <a href="https://doi.org/10.1016/j.neucom.2026.132638" target="_blank">doi.org/10.1016/j.neucom.2026.132638</a></div>
+      </div>
+      <div class="pub">
+        <div class="pub-title">Architecture of a Semantic WordCloud Visualization <span class="badge badge-pub">Conference 2021</span></div>
+        <div class="pub-meta">Rajan V.M., Ramanujan A. · <em>Second Int. Conf. on Networks and Advances in Computational Technologies</em>, Springer<br>
+        DOI: <a href="https://doi.org/10.1007/978-3-030-49500-8_9" target="_blank">10.1007/978-3-030-49500-8_9</a></div>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-top:.5rem">
+        <strong>Reviewer:</strong> ICML 2024 &nbsp;·&nbsp; ComSys 2025, 2026 &nbsp;·&nbsp; ICDM 2026
+      </p>
+    </div>
+
+    <!-- RESEARCH PROJECTS -->
+    <div class="section" id="projects">
+      <h2>Research Projects</h2>
+      <div class="entry">
+        <div class="entry-header"><div class="entry-title">1. Multi-Variate Time Series Anomaly Detection</div><div class="entry-period">Aug 2021 – Present</div></div>
+        <div class="entry-desc">Exploring unsupervised methods for anomaly detection in multivariate time-series from cyber-physical systems:
+          <ul>
+            <li><strong>HEIGHTS</strong> — Hierarchical Graph Structure Learning using two-level multi-view learning. Published in Neurocomputing 2026.</li>
+            <li><strong>FILTER</strong> — Nonparametric Feature Clustering for automatic feature grouping and explainable anomaly detection. <em>Under review.</em></li>
+            <li><strong>ProtoAD</strong> — Explainable anomaly detection via prototypes representing normal system behaviour.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="entry-header"><div class="entry-title">2. Fast Radio Burst (FRB) Identification in Astronomical Time Series</div><div class="entry-period">Nov 2022 – Jan 2024</div></div>
+        <div class="entry-sub">Collaboration with NCRA Pune, NVIDIA, and IIT Palakkad (NVAITC Program)</div>
+        <div class="entry-desc">Developed a multi-beam AI classifier to detect FRBs. Contributed to the <strong>SPOTLIGHT</strong> system deployed at GMRT, NCRA, Pune.</div>
+      </div>
+      <div class="entry">
+        <div class="entry-header"><div class="entry-title">3. TCAV — Testing with Concept Activation Vectors</div><div class="entry-period">April 2022</div></div>
+        <div class="entry-desc">Applied TCAV (Google) to a fruit classifier (GoogleNet on Fruits360) to identify human-friendly concepts. (CS6006: Responsible AI, IIT Palakkad)</div>
+      </div>
+      <div class="entry">
+        <div class="entry-header"><div class="entry-title">4. Image Captioning with CNN-LSTM</div><div class="entry-period">April 2022</div></div>
+        <div class="entry-desc">Deep learning framework for automatic image caption generation evaluated using BLEU score. (CS5007: Deep Learning, IIT Palakkad)</div>
+      </div>
+      <div class="entry">
+        <div class="entry-header"><div class="entry-title">5. Automatic Summarization using Semantic WordClouds</div><div class="entry-period">May 2018 – July 2019</div></div>
+        <div class="entry-sub">M.Tech Thesis · Published at NetCom 2021, Springer</div>
+        <div class="entry-desc">Novel semantic word cloud methodology using K-Medoids clustering on co-occurrence similarity matrices, evaluated using "Realized Adjacencies" metric.</div>
       </div>
     </div>
-  </div>
-  <!-- NAV inside header -->
-  <nav class="sticky-nav header-nav" id="mainNav" style="position:relative;top:auto;background:transparent;border-top:1px solid rgba(45,74,122,0.15);border-bottom:none;margin:0 -4rem;padding:0 4rem">
-    <a class="nav-link" href="#academic">🎓 Academic</a>
-    <a class="nav-link" href="#publications">📄 Publications</a>
-    <a class="nav-link" href="#research">🔬 Research</a>
-    <a class="nav-link" href="#projects">🛠 Projects</a>
-    <a class="nav-link" href="#courses">📚 Courses</a>
-    <a class="nav-link" href="#workshops">🧰 Workshops</a>
-    <a class="nav-link" href="#teaching">🏫 Teaching</a>
-    <a class="nav-link" href="#talks">🎤 Talks</a>
-    <a class="nav-link" href="#experience">💼 Experience</a>
-    <a class="nav-link" href="#achievements">🏆 Achievements</a>
-    <a class="nav-link" href="#personal">🌿 Personal</a>
-  </nav>
-</header>
 
-<!-- STICKY NAV (fixed on scroll) -->
-<nav class="sticky-nav fixed-nav" id="fixedNav" style="display:none">
-  <a class="nav-link" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">🏠 Home</a>
-  <a class="nav-link" href="#academic">🎓 Academic</a>
-  <a class="nav-link" href="#publications">📄 Publications</a>
-  <a class="nav-link" href="#research">🔬 Research</a>
-  <a class="nav-link" href="#projects">🛠 Projects</a>
-  <a class="nav-link" href="#courses">📚 Courses</a>
-  <a class="nav-link" href="#workshops">🧰 Workshops</a>
-  <a class="nav-link" href="#teaching">🏫 Teaching</a>
-  <a class="nav-link" href="#talks">🎤 Talks</a>
-  <a class="nav-link" href="#experience">💼 Experience</a>
-  <a class="nav-link" href="#achievements">🏆 Achievements</a>
-  <a class="nav-link" href="#personal">🌿 Personal</a>
-</nav>
-
-<!-- CONTACT BAR -->
-<div class="contact-bar">
-  <a href="mailto:112114001@smail.iitpkd.ac.in" class="clink">✉ 112114001@smail.iitpkd.ac.in</a> 
-  <a href="https://linkedin.com/in/vinitha-m-rajan/" class="clink" target="_blank">in LinkedIn</a>
-  <a href="https://github.com/Vinitha-M-R" class="clink" target="_blank">⌥ GitHub</a>
-  <a href="#" class="clink">↓ Download CV</a>
-</div>
-
-<!-- 1. ACADEMIC PROFILE -->
-<section class="page-section" id="academic">
-  <div class="sec-label">Education</div>
-  <div class="sec-title">Academic Profile</div>
-  <div class="sec-bar"></div>
-  <div class="edu-grid">
-    <div class="edu-card">
-      <div class="edu-degree">PhD Scholar</div>
-      <div class="edu-field">Department of Data Science</div>
-      <div class="edu-inst">Indian Institute of Technology Palakkad, Kerala</div>
-      <div class="edu-meta"><span class="edu-year">2021 – Present</span><span class="edu-cgpa">CGPA 9.75/10</span></div>
-    </div>
-    <div class="edu-card">
-      <div class="edu-degree">M.Tech — Computer Science & Engineering</div>
-      <div class="edu-field">Master of Technology</div>
-      <div class="edu-inst">College of Engineering Trivandrum</div>
-      <div class="edu-meta"><span class="edu-year">2017 – 2019</span><span class="edu-cgpa">CGPA 9.47/10</span></div>
-    </div>
-    <div class="edu-card">
-      <div class="edu-degree">B.Tech — Computer Science & Engineering</div>
-      <div class="edu-field">Bachelor of Technology</div>
-      <div class="edu-inst">National Institute of Technology Calicut</div>
-      <div class="edu-meta"><span class="edu-year">2004 – 2008</span><span class="edu-cgpa">CGPA 8.48/10</span></div>
-    </div>
-    <div class="edu-card">
-      <div class="edu-degree">PhD Thesis</div>
-      <div class="edu-field">Deep Modeling Techniques for Time Series Anomaly Detection</div>
-      <div class="edu-inst">Supervised by Dr. Sahely Bhadra</div>
-      <div class="edu-meta"><span class="edu-year">Ongoing</span></div>
-    </div>
-  </div>
-  <!-- PhD Coursework -->
-  <div style="margin-top:2rem">
-    <div class="col-lbl">PhD Coursework · Total Credits: 16 · CGPA: 9.75/10</div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px">
-      <div class="item-card"><div class="item-title">CS5512 — Machine Learning</div><div class="item-sub">Grade: S</div></div>
-      <div class="item-card"><div class="item-title">CS5011 — Optimization</div><div class="item-sub">Grade: S</div></div>
-      <div class="item-card"><div class="item-title">CS5007 — Deep Learning</div><div class="item-sub">Grade: S</div></div>
-      <div class="item-card"><div class="item-title">CS6006 — Responsible AI</div><div class="item-sub">Grade: S</div></div>
-      <div class="item-card"><div class="item-title">MA5007 — Probability & Statistics</div><div class="item-sub">Grade: A</div></div>
-      <div class="item-card"><div class="item-title">GN6001 — Research Methodology</div><div class="item-sub">Grade: P (Pass/Fail)</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- 2. PUBLICATIONS -->
-<section class="page-section" id="publications">
-  <div class="sec-label">Scholarly output</div>
-  <div class="sec-title">Publications</div>
-  <div class="sec-bar"></div>
-  <div class="pub-card">
-    <div class="pub-title">HEIGHTS: Hierarchical Graph Structure Learning for Time Series Anomaly Detection</div>
-    <div class="pub-meta">Vinitha M Rajan, Sahely Bhadra · <em>Journal of Neurocomputing</em>, Volume 671, 2026, 132638, ISSN 0925-2312<br>
-    <a href="https://doi.org/10.1016/j.neucom.2026.132638" target="_blank">doi.org/10.1016/j.neucom.2026.132638</a></div>
-    <span class="pub-badge badge-teal">Journal · 2026</span>
-  </div>
-  <div class="pub-card">
-    <div class="pub-title">Architecture of a Semantic WordCloud Visualization</div>
-    <div class="pub-meta">Rajan V.M., Ramanujan A. · <em>Second International Conference on Networks and Advances in Computational Technologies</em> · Transactions on Computational Science and Computational Intelligence, Springer<br>
-    DOI: 10.1007/978-3-030-49500-8_9</div>
-    <span class="pub-badge badge-blue">Conference · 2021</span>
-  </div>
-  <!-- Reviewer Roles -->
-  <div style="margin-top:2rem">
-    <div class="col-lbl">Reviewer Roles</div>
-    <div class="item-card"><div class="item-sub">ICML 2024 &nbsp;·&nbsp; ComSys 2025, 2026 &nbsp;·&nbsp; ICDM 2026</div></div>
-  </div>
-</section>
-
-<!-- 3. RESEARCH INTERESTS -->
-<section class="page-section" id="research">
-  <div class="sec-label">Scholarly work</div>
-  <div class="sec-title">Research Interests</div>
-  <div class="sec-bar"></div>
-  <div class="research-grid">
-    <div class="r-card">
-      <h3>Time Series Analysis</h3>
-      <p>Forecasting, anomaly detection, and statistical analysis of sequential data from cyber-physical and industrial systems.</p>
-      <span class="r-tag">Core focus</span>
-    </div>
-    <div class="r-card">
-      <h3>Anomaly Detection</h3>
-      <p>Detecting unusual patterns in multivariate time-series from cyber-physical systems using unsupervised deep learning and graph-based models.</p>
-      <span class="r-tag">Core focus</span>
-    </div>
-    <div class="r-card">
-      <h3>Deep Learning</h3>
-      <p>Graph neural networks, transformers, LSTMs, and normalizing flows for sequential and structured data.</p>
-      <span class="r-tag">Active</span>
-    </div>
-    <div class="r-card">
-      <h3>Explainable AI</h3>
-      <p>Developing interpretable models that provide actionable explanations for anomalies in industrial systems.</p>
-      <span class="r-tag">Active</span>
-    </div>
-    <div class="r-card">
-      <h3>Data Analytics</h3>
-      <p>Clustering, association rule mining, dimensionality reduction, and statistical analysis of heterogeneous datasets.</p>
-      <span class="r-tag">Ongoing</span>
-    </div>
-    <div class="r-card">
-      <h3>Text Mining</h3>
-      <p>Semantic word cloud visualization, summarization, and NLP techniques for document analysis.</p>
-      <span class="r-tag">Exploring</span>
-    </div>
-  </div>
-  <!-- Skills -->
-  <div style="margin-top:2.5rem">
-    <div class="col-lbl">Skills & Tools</div>
-    <div class="skills-grid">
-      <div class="skill-grp"><div class="skill-grp-lbl">Languages</div><div class="skill-pills"><span class="skill-pill">Python</span><span class="skill-pill">MATLAB</span><span class="skill-pill">Java</span><span class="skill-pill">C/C++</span><span class="skill-pill">HTML</span></div></div>
-      <div class="skill-grp"><div class="skill-grp-lbl">Frameworks</div><div class="skill-pills"><span class="skill-pill">PyTorch</span><span class="skill-pill">TensorFlow</span><span class="skill-pill">Scikit-learn</span><span class="skill-pill">NumPy</span><span class="skill-pill">Pandas</span><span class="skill-pill">Optuna</span><span class="skill-pill">Ray Tuning</span></div></div>
-      <div class="skill-grp"><div class="skill-grp-lbl">Visualization</div><div class="skill-pills"><span class="skill-pill">Matplotlib</span><span class="skill-pill">Seaborn</span></div></div>
-      <div class="skill-grp"><div class="skill-grp-lbl">Tools & Env</div><div class="skill-pills"><span class="skill-pill">Jupyter</span><span class="skill-pill">Google Colab</span><span class="skill-pill">Spyder</span><span class="skill-pill">Conda</span><span class="skill-pill">Visual Studio</span></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- 4. RESEARCH PROJECTS -->
-<section class="page-section" id="projects">
-  <div class="sec-label">Work in progress & completed</div>
-  <div class="sec-title">Research Projects</div>
-  <div class="sec-bar"></div>
-  <div class="proj-card">
-    <div class="proj-header"><div class="proj-title">1. Multi-Variate Time Series Anomaly Detection</div><div class="proj-period">Aug 2021 – Present</div></div>
-    <div class="proj-desc">Exploring three research directions for unsupervised anomaly detection in multivariate time-series from cyber-physical systems:
-      <ul>
-        <li><strong style="color:var(--light)">HEIGHTS</strong> — Hierarchical Graph Structure Learning modelling subsystem architecture and interactions using two-level multi-view learning. Published in Neurocomputing 2026.</li>
-        <li><strong style="color:var(--light)">FILTER</strong> — Nonparametric Feature Clustering that automatically clusters features and uses this for anomaly detection with explainability. Currently under review.</li>
-        <li><strong style="color:var(--light)">ProtoAD</strong> — Explainable Anomaly Detection via prototypes representing normal behaviour, improving detection performance and interpretability for end users.</li>
+    <!-- SKILLS -->
+    <div class="section" id="skills">
+      <h2>Skills</h2>
+      <ul class="plain">
+        <li><strong>Languages:</strong> Python, MATLAB, Java, C, C++, HTML</li>
+        <li><strong>Frameworks:</strong> PyTorch, TensorFlow, Scikit-learn, NumPy, Pandas, Matplotlib, Seaborn, Optuna, Ray Tuning</li>
+        <li><strong>Tools:</strong> Jupyter, Google Colab, Spyder, Visual Studio, NetBeans, Conda</li>
       </ul>
     </div>
-    <div style="margin-top:8px"><span class="pub-badge badge-teal">Published</span> <span class="pub-badge badge-gold">Under Review</span> <span class="pub-badge badge-red">Ongoing</span></div>
-  </div>
-  <div class="proj-card">
-    <div class="proj-header"><div class="proj-title">2. Fast Radio Burst (FRB) Identification in Astronomical Time Series</div><div class="proj-period">Nov 2022 – Jan 2024</div></div>
-    <div class="proj-desc">Collaboration with NCRA Pune, NVIDIA, and IIT Palakkad under the NVIDIA AI Technology Center (NVAITC) program. Developed a multi-beam AI classifier to detect FRBs from telescopic time-series data. Contributed to the SPOTLIGHT system deployed at the GMRT, NCRA, Pune.</div>
-    <div style="margin-top:8px"><span class="pub-badge badge-green">Deployed · GMRT Pune</span></div>
-  </div>
-  <div class="proj-card">
-    <div class="proj-header"><div class="proj-title">3. TCAV — Testing with Concept Activation Vectors</div><div class="proj-period">April 2022</div></div>
-    <div class="proj-desc">Applied TCAV interpretability technique (Google) to identify human-friendly concepts relevant to fruit classification. Built a transfer-learned GoogleNet model on Fruits360 dataset and computed TCAV scores to measure how well each concept was learned. (CS6006: Responsible AI, IIT Palakkad)</div>
-  </div>
-  <div class="proj-card">
-    <div class="proj-header"><div class="proj-title">4. Image Captioning with CNN-LSTM</div><div class="proj-period">April 2022</div></div>
-    <div class="proj-desc">Built a deep learning framework to automatically generate natural-language captions for images using pretrained CNN embeddings fed into an LSTM. Evaluated using BLEU score and experimented with multiple CNN variants. (CS5007: Deep Learning, IIT Palakkad)</div>
-  </div>
-  <div class="proj-card">
-    <div class="proj-header"><div class="proj-title">5. Automatic Summarization using Semantic WordClouds</div><div class="proj-period">May 2018 – July 2019</div></div>
-    <div class="proj-desc">MTech thesis. Developed a novel semantic word cloud methodology preserving local word neighbourhoods using K-Medoids clustering on co-occurrence similarity matrices. Evaluated using "Realized Adjacencies" metric. Published at NetCom 2021.</div>
-    <div style="margin-top:8px"><span class="pub-badge badge-blue">Published · Springer 2021</span></div>
-  </div>
-</section>
 
-<!-- 5. COURSES & MOOCs -->
-<section class="page-section" id="courses">
-  <div class="sec-label">Learning & development</div>
-  <div class="sec-title">Courses & MOOCs</div>
-  <div class="sec-bar"></div>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px">
-    <div class="item-card"><div class="item-title">Machine Learning</div><div class="item-sub">Stanford University · Coursera</div></div>
-    <div class="item-card"><div class="item-title">Mathematics for ML: Linear Algebra</div><div class="item-sub">Imperial College London · Coursera</div></div>
-    <div class="item-card"><div class="item-title">Introduction to Data Science in Python</div><div class="item-sub">University of Michigan · Coursera</div></div>
-    <div class="item-card"><div class="item-title">Data Collection & Processing with Python</div><div class="item-sub">University of Michigan · Coursera</div></div>
-    <div class="item-card"><div class="item-title">Python Functions, Files & Dictionaries</div><div class="item-sub">University of Michigan · Coursera</div></div>
-    <div class="item-card"><div class="item-title">Python Basics</div><div class="item-sub">University of Michigan · Coursera</div></div>
-  </div>
-</section>
+    <!-- TEACHING -->
+    <div class="section" id="teaching">
+      <h2>Teaching Assistance &nbsp;<span style="font-size:12px;font-weight:400;text-transform:none;letter-spacing:0;color:var(--light)">IIT Palakkad · Masters &amp; Undergraduate students</span></h2>
+      <table class="course-table">
+        <thead><tr><th>Course</th><th>Title</th><th>Period</th></tr></thead>
+        <tbody>
+          <tr><td>DS2010</td><td>Optimization</td><td>Aug–Dec '22, Aug–Dec '23</td></tr>
+          <tr><td>DS5608</td><td>Time Series Analysis</td><td>Jan–May '24</td></tr>
+          <tr><td>DS5612</td><td>Data Mining</td><td>Aug–Dec '24</td></tr>
+          <tr><td>DS3030</td><td>Data Analytics</td><td>Aug–Dec '25</td></tr>
+          <tr><td>DS3060</td><td>AI Ethics</td><td>Jan–May '25, Jan–May '26</td></tr>
+        </tbody>
+      </table>
 
-<!-- 6. WORKSHOPS -->
-<section class="page-section" id="workshops">
-  <div class="sec-label">Hands-on learning & outreach</div>
-  <div class="sec-title">Workshops</div>
-  <div class="sec-bar"></div>
-  <div class="two-col">
-    <div>
-      <div class="col-lbl">Workshops Attended</div>
-      <div class="timeline">
-        <div class="tl-item"><div class="tl-dot"></div><div class="tl-title">Data Science: Probabilistic and Optimization Methods</div><div class="tl-sub"><span>ICTS (TIFR)</span>, Bangalore</div></div>
-        <div class="tl-item"><div class="tl-dot"></div><div class="tl-title">MATLAB for Machine Learning</div><div class="tl-sub"><span>Mathworks</span> & IIT Palakkad</div></div>
-        <div class="tl-item"><div class="tl-dot"></div><div class="tl-title">Applications of AI for Predictive Maintenance</div><div class="tl-sub"><span>NVIDIA</span> Deep Learning Institute</div></div>
-        <div class="tl-item"><div class="tl-dot"></div><div class="tl-title">Accelerating Data Engineering Pipelines</div><div class="tl-sub"><span>NVIDIA</span> Deep Learning Institute</div></div>
-        <div class="tl-item"><div class="tl-dot"></div><div class="tl-title">Fundamentals of Deep Learning</div><div class="tl-sub"><span>NVIDIA</span> Deep Learning Institute</div></div>
-        <div class="tl-item"><div class="tl-dot"></div><div class="tl-title">Technical Writing Workshop</div><div class="tl-sub"><span>IIT Palakkad</span> & IIT Madras</div></div>
-        <div class="tl-item"><div class="tl-dot"></div><div class="tl-title">Sun Certified Programmer for Java 6</div><div class="tl-sub"><span>Oracle</span> India Private Limited</div></div>
+      <h2 style="margin-top:1.5rem">Teaching Experience</h2>
+      <div class="entry">
+        <div class="entry-header"><div class="entry-title">Assistant Professor</div><div class="entry-period">Jan – Jul 2020</div></div>
+        <div class="entry-sub">Mar Baselios College of Engineering and Technology, Trivandrum</div>
+        <div class="entry-desc">Courses: Software Engineering, Advanced Computer Architecture.</div>
       </div>
     </div>
-    <div>
-      <div class="col-lbl">Workshops Conducted</div>
-      <div class="timeline">
-        <div class="tl-item"><div class="tl-dot"></div><div class="tl-meta"><span class="tl-year">2022</span></div><div class="tl-title">Petrichor TechFest — ML Hands-on</div><div class="tl-sub"><span>IIT Palakkad</span> · Linear regression, SVM, Clustering</div></div>
-        <div class="tl-item"><div class="tl-dot"></div><div class="tl-meta"><span class="tl-year">2023 & 2024</span></div><div class="tl-title">ScienceQuest — AI for School Students</div><div class="tl-sub"><span>IIT Palakkad</span> · Google Teachable Machine, image classification</div></div>
-        <div class="tl-item"><div class="tl-dot"></div><div class="tl-meta"><span class="tl-year">2024</span></div><div class="tl-title">Time Series Workshop</div><div class="tl-sub"><span>IIT Palakkad</span> · ARIMA, SARIMA, RNN, LSTM, GRU</div></div>
-        <div class="tl-item"><div class="tl-dot"></div><div class="tl-meta"><span class="tl-year">2025</span></div><div class="tl-title">AI & Data Science Session — Open House</div><div class="tl-sub"><span>IIT Palakkad</span> · AI tools demo for students & public</div></div>
-        <div class="tl-item"><div class="tl-dot"></div><div class="tl-meta"><span class="tl-year">2026</span></div><div class="tl-title">Data Analytics Certification Course</div><div class="tl-sub"><span>IIT Palakkad</span> · Clustering & Association Rule Mining for industry</div></div>
+
+    <!-- WORKSHOPS -->
+    <div class="section" id="workshops">
+      <h2>Workshops Conducted</h2>
+      <ul class="plain">
+        <li>Petrichor TechFest 2022, IIT Palakkad — Hands-on ML session (Linear Regression, SVM, Clustering)</li>
+        <li>ScienceQuest (AI for School Students), IIT Palakkad, 2023 &amp; 2024 — Google Teachable Machine, image classification</li>
+        <li>Time Series Workshop, IIT Palakkad, 2024 — ARIMA, SARIMA, RNN, LSTM, GRU</li>
+        <li>AI &amp; Data Science Session, Annual Open House, IIT Palakkad, 2025</li>
+        <li>Data Analytics Certification Course, IIT Palakkad, 2026 — Clustering &amp; Association Rule Mining</li>
+      </ul>
+
+      <h2 style="margin-top:1.5rem">Workshops Attended</h2>
+      <ul class="plain">
+        <li>Data Science: Probabilistic and Optimization Methods — ICTS (TIFR), Bangalore</li>
+        <li>MATLAB for Machine Learning — Mathworks &amp; IIT Palakkad</li>
+        <li>Applications of AI for Predictive Maintenance — NVIDIA Deep Learning Institute</li>
+        <li>Accelerating Data Engineering Pipelines — NVIDIA Deep Learning Institute</li>
+        <li>Fundamentals of Deep Learning — NVIDIA Deep Learning Institute</li>
+        <li>Technical Writing Workshop — IIT Palakkad &amp; IIT Madras</li>
+        <li>Sun Certified Programmer for Java 6 — Oracle India Private Limited</li>
+      </ul>
+
+    </div>
+
+    <!-- RESEARCH GROUP ACTIVITIES -->
+    <div class="section" id="researchgroup">
+      <h2>Research Group &nbsp;<span style="font-size:12px;font-weight:400;text-transform:none;letter-spacing:0;color:var(--light)"><a href="https://mlgiitpkd.github.io/" target="_blank">MLG IIT Palakkad</a></span></h2>
+      <ul class="plain">
+        <li>Florence Nightingale Data Science Talk Series — Organised monthly talks by experts in academia and industry</li>
+        <li>Journal Reading Club — Presented papers on Transformer, TranAD, KAN, KAN-AD, ProtoAD, Normalizing Flow, Reinforcement Learning, Grover's Algorithm</li>
+        <li>Website Maintenance — Research group website</li>
+        <li>Server Management — GPU server administration, user access, and environment setup</li>
+      </ul>
+    </div>
+
+    <!-- TALKS -->
+    <div class="section" id="talks">
+    </div>
+
+    <!-- POSTER PRESENTATIONS -->
+    <div class="section" id="posters">
+      <h2>Poster Presentations</h2>
+      <ul class="plain">
+        <li><strong>HEIGHTS</strong> — IAC 5.0 (2023), Annual Research Scholars' Day 2024, Data Science Research Symposium 2026, IAC 8.0 (2026) &nbsp;·&nbsp; IIT Palakkad</li>
+        <li><strong>FILTER</strong> — Annual Research Scholars' Day 2026 &nbsp;·&nbsp; IIT Palakkad</li>
+        <li>🏆 <strong>Best Research Talk Award</strong> — Annual Research Scholars' Day 2025, Dept. of Data Science, IIT Palakkad <span class="badge badge-award">Award</span></li>
+      </ul>
+
+    </div>
+
+    <!-- INVITED TALKS -->
+    <div class="section" id="talks">
+      <h2>Talks Attended</h2>
+      <ul class="plain">
+        <li>Fundamental Limits of Learning Non-Hallucinating Generative Models — Prof. Ananth Grama, Purdue University</li>
+        <li>New Frontiers in AI and Biomedicine — Prof. Shankar Subramaniam, UC San Diego</li>
+        <li>LLMs to Improve Ads Quality — Dr. Samarth Bharadwaj, Microsoft</li>
+        <li>Temporal Graph Pipelines: From Algorithmics to Predictive Models — Prof. Srikanta Bedathur, IIT Delhi</li>
+        <li>Efficient, Robust, and Equitable: A Decade of Deep Learning — Prof. R. Venkatesh Babu, IISc Bangalore</li>
+        <li>Practical Applications of Large Language Models — Dr. Ashish Tendulkar, Google</li>
+        <li>Explainability is All You Need: AI and Law — Dr. Kripabandhu Ghosh, IISER Kolkata</li>
+        <li>AI-in-the-loop for Healthcare — Prof. Sriraam Natarajan, University of Texas</li>
+        <li>The Power of Pretraining — Prof. Niloy Ganguly, IIT Kharagpur</li>
+        <li>Data-driven Decision Frameworks for COVID-19 — Prof. Rajesh Sundaresan, IISc Bangalore</li>
+        <li>Question Answering using Knowledge Graphs — Dr. Soumajit Pramanik, IIT Bhilai</li>
+        <li>When Algorithms Meet Self-Interest: Multi-Agent AI — Dr. Swaprava Nath, IIT Bombay</li>
+      </ul>
+    </div>
+
+    <!-- EXPERIENCE -->
+    <div class="section" id="experience">
+      <h2>Experience</h2>
+      <div class="entry">
+        <div class="entry-header"><div class="entry-title">PhD Research Scholar</div><div class="entry-period">2021 – Present</div></div>
+        <div class="entry-sub">Department of Data Science, IIT Palakkad</div>
+      </div>
+      <div class="entry">
+        <div class="entry-header"><div class="entry-title">Assistant Professor</div><div class="entry-period">Jan – Jul 2020</div></div>
+        <div class="entry-sub">Mar Baselios College of Engineering and Technology, Trivandrum</div>
+        <div class="entry-desc">Courses: Software Engineering, Advanced Computer Architecture.</div>
+      </div>
+      <div class="entry">
+        <div class="entry-header"><div class="entry-title">Senior Applications Engineer</div><div class="entry-period">Jun 2012 – Sep 2015</div></div>
+        <div class="entry-sub">Oracle India Private Limited, Technopark, Trivandrum</div>
+        <div class="entry-desc">Oracle CRM On Demand — Maintained cloud application providing Oracle Siebel CRM services.</div>
+      </div>
+      <div class="entry">
+        <div class="entry-header"><div class="entry-title">Applications Engineer</div><div class="entry-period">Jun 2009 – May 2012</div></div>
+        <div class="entry-sub">Oracle India Private Limited, HITEC City, Hyderabad</div>
+        <div class="entry-desc">Application Management Pack — plugin between Oracle Enterprise Manager and Oracle E-Business Suite.</div>
+      </div>
+      <div class="entry">
+        <div class="entry-header"><div class="entry-title">Associate Applications Engineer</div><div class="entry-period">May 2008 – May 2009</div></div>
+        <div class="entry-sub">Oracle India Private Limited, HITEC City, Hyderabad</div>
       </div>
     </div>
-  </div>
-  <!-- Research Group -->
-  <div style="margin-top:2.5rem">
-    <div class="col-lbl">Research Group Activities · MLG IIT Palakkad</div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px">
-      <div class="item-card"><div class="item-title">Florence Nightingale Data Science Talk Series</div><div class="item-sub">Organised monthly talks on emerging AI topics by experts in academia and industry.</div></div>
-      <div class="item-card"><div class="item-title">Journal Reading Club</div><div class="item-sub">Presented papers on Transformer, TranAD, Normalizing Flow, KAN, KAN-AD, ProtoAD, Grover's Algorithm, Reinforcement Learning.</div></div>
-      <div class="item-card"><div class="item-title">Website & Server Maintenance</div><div class="item-sub">Maintained research group website and managed GPU servers — user creation, access management, environment setup.</div></div>
+
+    <!-- ACHIEVEMENTS -->
+    <div class="section" id="achievements">
+      <h2>Academic Achievements</h2>
+      <ul class="plain">
+        <li>UGC-NET JRF Award with 100 percentile score — December 2019 <span class="badge badge-award">Award</span></li>
+        <li>UGC-NET Assistant Professor Qualification — December 2019</li>
+        <li>Best Research Talk — Annual Research Scholars' Day 2025, Dept. of Data Science, IIT Palakkad <span class="badge badge-award">Award</span></li>
+        <li>Academic Excellence Award — College of Engineering Trivandrum, 2019</li>
+        <li>GATE 2017 — All India Rank 826, Score: 684</li>
+        <li>AIEEE 2004 — All India Rank 2920, Kerala Rank: 97</li>
+        <li>Kerala Engineering Entrance 2004 — Rank 151</li>
+      </ul>
     </div>
-  </div>
-</section>
 
-<!-- 7. TEACHING -->
-<section class="page-section" id="teaching">
-  <div class="sec-label">Pedagogy</div>
-  <div class="sec-title">Teaching</div>
-  <div class="sec-bar"></div>
-  <div class="col-lbl" style="margin-bottom:1.2rem">Teaching Assistance · IIT Palakkad · Masters & Undergraduate students</div>
-  <div class="exp-card">
-    <div><div class="exp-role">DS2010 — Optimization</div><div class="exp-org">IIT Palakkad</div><div class="exp-desc">Designed tutorials, homework sets, and programming assignments. Responsible for midterm questions and evaluation.</div><span class="pub-badge badge-teal">Repeated Course</span></div>
-    <div class="exp-period">Aug–Dec '22 · Aug–Dec '23</div>
-  </div>
-  <div class="exp-card">
-    <div><div class="exp-role">DS5608 — Time Series Analysis</div><div class="exp-org">IIT Palakkad</div><div class="exp-desc">Developed Data Analysis lab assignments covering numerical, tabular, language, and vision datasets using WEKA and Python.</div></div>
-    <div class="exp-period">Jan–May '24</div>
-  </div>
-  <div class="exp-card">
-    <div><div class="exp-role">DS5612 — Data Mining</div><div class="exp-org">IIT Palakkad</div><div class="exp-desc">Lab assignments on clustering, association rule mining, dimensionality reduction, and statistical analysis.</div></div>
-    <div class="exp-period">Aug–Dec '24</div>
-  </div>
-  <div class="exp-card">
-    <div><div class="exp-role">DS3030 — Data Analytics</div><div class="exp-org">IIT Palakkad</div><div class="exp-desc">Hands-on assignments with diverse dataset types and visualization techniques.</div></div>
-    <div class="exp-period">Aug–Dec '25</div>
-  </div>
-  <div class="exp-card">
-    <div><div class="exp-role">DS3060 — AI Ethics</div><div class="exp-org">IIT Palakkad</div><div class="exp-desc">Developed the AI Ethics Lab project to analyze societal biases in the COMPAS dataset using fairness metrics (Treatment Equality, Demographic Parity, Equal Opportunity). Applied pre/in/post-processing bias mitigation techniques.</div><span class="pub-badge badge-teal">Repeated Course</span></div>
-    <div class="exp-period">Jan–May '25 · Jan–May '26</div>
-  </div>
-  <!-- Teaching Experience -->
-  <div style="margin-top:2rem">
-    <div class="col-lbl">Teaching Experience</div>
-    <div class="exp-card">
-      <div><div class="exp-role">Assistant Professor</div><div class="exp-org">Mar Baselios College of Engineering and Technology, Trivandrum</div><div class="exp-desc">Taught Software Engineering and Advanced Computer Architecture. Incorporated visual aids and group assignments on tools like BitMatrix24, OrangeScrum, and GitHub.</div></div>
-      <div class="exp-period">Jan–Jul 2020</div>
+    <!-- PERSONAL -->
+    <div class="section" id="personal">
+      <h2>Personal</h2>
+      <ul class="plain">
+        <li><strong>Date of Birth:</strong> 10 April 1986</li>
+        <li><strong>Nationality:</strong> Indian</li>
+        <li><strong>Languages:</strong> Malayalam (Native), English, Hindi, Tamil, Telugu</li>
+        <li><strong>Address:</strong> Aswathi (H), Anickadu P.O., Kottayam, Kerala, India — 686503</li>
+        <li><strong>Personal Email:</strong> <a href="mailto:vinithamr.nitc@gmail.com">vinithamr.nitc@gmail.com</a></li>
+        <li><strong>Phone:</strong> <a href="tel:+919446382600">+91 9446382600</a></li>
+      </ul>
     </div>
-  </div>
-</section>
 
-<!-- 8. TALKS -->
-<section class="page-section" id="talks">
-  <div class="sec-label">Knowledge exchange</div>
-  <div class="sec-title">Posters, Talks & Events</div>
-  <div class="sec-bar"></div>
-  <div class="two-col">
-    <div>
-      <div class="col-lbl">Poster Presentations</div>
-      <div class="item-card">
-        <div class="item-title">HEIGHTS — Published Work</div>
-        <div class="item-sub">IAC 5.0 (2023) · Annual Research Scholars' Day 2024 · Annual Data Science Research Symposium 2026 · IAC 8.0 (2026)</div>
-        <span class="pub-badge badge-teal">IIT Palakkad</span>
-      </div>
-      <div class="item-card">
-        <div class="item-title">FILTER — Ongoing Work</div>
-        <div class="item-sub">Annual Research Scholars' Day 2026</div>
-        <span class="pub-badge badge-gold">IIT Palakkad</span>
-      </div>
-      <div class="item-card">
-        <div class="item-title">🏆 Best Research Talk Award</div>
-        <div class="item-sub">Annual Research Scholars' Day 2025 · Department of Data Science, IIT Palakkad</div>
-        <span class="pub-badge badge-green">Award · 2025</span>
-      </div>
-    </div>
-    <div>
-      <div class="col-lbl">Invited Talks Attended (Selected)</div>
-      <div class="timeline">
-        <div class="tl-item"><div class="tl-dot"></div><div class="tl-title">Fundamental Limits of Learning Non-Hallucinating Generative Models</div><div class="tl-sub"><span>Prof. Ananth Grama</span>, Purdue University</div></div>
-        <div class="tl-item"><div class="tl-dot"></div><div class="tl-title">LLMs to Improve Ads Quality in Microsoft Ads</div><div class="tl-sub"><span>Dr. Samarth Bharadwaj</span>, Microsoft</div></div>
-        <div class="tl-item"><div class="tl-dot"></div><div class="tl-title">Temporal Graph Pipelines: Algorithmics to Predictive Models</div><div class="tl-sub"><span>Prof. Srikanta Bedathur</span>, IIT Delhi</div></div>
-        <div class="tl-item"><div class="tl-dot"></div><div class="tl-title">Efficient, Robust, and Equitable: A Decade of Deep Learning</div><div class="tl-sub"><span>Prof. R. Venkatesh Babu</span>, IISc Bangalore</div></div>
-        <div class="tl-item"><div class="tl-dot"></div><div class="tl-title">Practical Applications of Large Language Models</div><div class="tl-sub"><span>Dr. Ashish Tendulkar</span>, Google</div></div>
-        <div class="tl-item"><div class="tl-dot"></div><div class="tl-title">Explainability is All You Need: AI and Law</div><div class="tl-sub"><span>Dr. Kripabandhu Ghosh</span>, IISER Kolkata</div></div>
-        <div class="tl-item"><div class="tl-dot"></div><div class="tl-title">AI-in-the-loop for Healthcare</div><div class="tl-sub"><span>Prof. Sriraam Natarajan</span>, University of Texas</div></div>
-        <div class="tl-item"><div class="tl-dot"></div><div class="tl-title">The Power of Pretraining</div><div class="tl-sub"><span>Prof. Niloy Ganguly</span>, IIT Kharagpur</div></div>
-      </div>
-    </div>
-  </div>
-</section>
+  </main>
+</div>
 
-<!-- 9. EXPERIENCE -->
-<section class="page-section" id="experience">
-  <div class="sec-label">Professional journey</div>
-  <div class="sec-title">Experience</div>
-  <div class="sec-bar"></div>
-  <div class="exp-card">
-    <div><div class="exp-role">PhD Research Scholar</div><div class="exp-org">Department of Data Science, IIT Palakkad</div><div class="exp-desc">Doctoral research on Deep Modeling Techniques for Time Series Anomaly Detection. Publications, teaching assistance, workshop conduction, and research group activities.</div><span class="pub-badge badge-teal">Current</span></div>
-    <div class="exp-period">2021 – Present</div>
-  </div>
-  <div class="exp-card">
-    <div><div class="exp-role">Assistant Professor</div><div class="exp-org">Mar Baselios College of Engineering and Technology, Trivandrum</div><div class="exp-desc">Taught Software Engineering and Advanced Computer Architecture to undergraduate students.</div></div>
-    <div class="exp-period">Jan–Jul 2020</div>
-  </div>
-  <div class="exp-card">
-    <div><div class="exp-role">Senior Applications Engineer</div><div class="exp-org">Oracle India Private Limited, Technopark, Trivandrum</div><div class="exp-desc">Maintained Oracle CRM On Demand cloud application providing Oracle Siebel CRM services.</div></div>
-    <div class="exp-period">Jun 2012 – Sep 2015</div>
-  </div>
-  <div class="exp-card">
-    <div><div class="exp-role">Applications Engineer</div><div class="exp-org">Oracle India Private Limited, HITEC City, Hyderabad</div><div class="exp-desc">Developed efficient integration methods for Application Management Pack — a plugin between Oracle Enterprise Manager and Oracle E-Business Suite.</div></div>
-    <div class="exp-period">Jun 2009 – May 2012</div>
-  </div>
-  <div class="exp-card">
-    <div><div class="exp-role">Associate Applications Engineer</div><div class="exp-org">Oracle India Private Limited, HITEC City, Hyderabad</div><div class="exp-desc">Worked on Application Management Pack, ensuring seamless integration across service version upgrades.</div></div>
-    <div class="exp-period">May 2008 – May 2009</div>
-  </div>
-</section>
-
-<!-- 10. ACHIEVEMENTS -->
-<section class="page-section" id="achievements">
-  <div class="sec-label">Honours & recognition</div>
-  <div class="sec-title">Academic Achievements</div>
-  <div class="sec-bar"></div>
-  <div class="achieve-list">
-    <div class="achieve-item"><div class="achieve-num">1</div><div class="achieve-text"><strong style="color:var(--white)">UGC-NET JRF Award</strong> with 100 percentile score — December 2019</div></div>
-    <div class="achieve-item"><div class="achieve-num">2</div><div class="achieve-text"><strong style="color:var(--white)">UGC-NET Assistant Professor Qualification</strong> — December 2019</div></div>
-    <div class="achieve-item"><div class="achieve-num">3</div><div class="achieve-text"><strong style="color:var(--white)">Best Research Talk Award</strong> — Annual Research Scholars' Day 2025, Department of Data Science, IIT Palakkad</div></div>
-    <div class="achieve-item"><div class="achieve-num">4</div><div class="achieve-text"><strong style="color:var(--white)">Academic Excellence Award</strong> — College of Engineering Trivandrum, 2019</div></div>
-    <div class="achieve-item"><div class="achieve-num">5</div><div class="achieve-text"><strong style="color:var(--white)">GATE 2017</strong> — All India Rank 826 · Score: 684</div></div>
-    <div class="achieve-item"><div class="achieve-num">6</div><div class="achieve-text"><strong style="color:var(--white)">AIEEE 2004</strong> — All India Rank 2920 · Kerala Rank: 97</div></div>
-    <div class="achieve-item"><div class="achieve-num">7</div><div class="achieve-text"><strong style="color:var(--white)">Kerala Engineering Entrance 2004</strong> — Rank 151</div></div>
-  </div>
-</section>
-
-<!-- 11. PERSONAL -->
-<section class="page-section" id="personal">
-  <div class="sec-label">Beyond academics</div>
-  <div class="sec-title">Personal Profile</div>
-  <div class="sec-bar"></div>
-  <div class="personal-grid">
-    <div class="p-card"><h3>About me</h3><p>A curious and driven researcher who finds joy in solving complex problems through data. Committed to building AI that is not only powerful but also interpretable, fair, and socially responsible.</p></div>
-    <div class="p-card"><h3>Date of Birth</h3><p>10 April 1986 · Indian</p></div>
-    <div class="p-card"><h3>Languages Known</h3><div class="interest-list"><span class="interest-pill">Malayalam</span><span class="interest-pill">English</span><span class="interest-pill">Hindi</span><span class="interest-pill">Tamil</span><span class="interest-pill">Telugu</span></div></div>
-    <div class="p-card"><h3>Contact</h3><p>📧 <a href="mailto:vinithamr.nitc@gmail.com" style="color:var(--teal2);text-decoration:none">vinithamr.nitc@gmail.com</a><br>📞 <a href="tel:+919446382600" style="color:var(--teal2);text-decoration:none">+91 9446382600</a></p></div>
-    <div class="p-card"><h3>Address</h3><p>Aswathi (H), Anickadu P.O., Kottayam, Kerala, India — 686503</p></div>
-  </div>
-</section>
-
-<footer>© 2026 Vinitha M Rajan · PhD Scholar, Department of Data Science, IIT Palakkad · All rights reserved</footer>
+<footer>
+  &copy; 2026 Vinitha M Rajan &nbsp;·&nbsp; Department of Data Science, IIT Palakkad
+</footer>
 
 <script>
-  // Show/hide fixed nav
-  const headerNav = document.getElementById('mainNav');
-  const fixedNav  = document.getElementById('fixedNav');
-  new IntersectionObserver(([e]) => {
-    fixedNav.style.display = e.isIntersecting ? 'none' : 'flex';
-  }, {threshold:0}).observe(headerNav);
-
-  // Highlight active nav link in fixed nav only (scroll-based)
-  const sections = document.querySelectorAll('.page-section');
-  const fixedLinks = document.querySelectorAll('.fixed-nav .nav-link');
-
+  // Highlight active sidebar link on scroll
+  const sections = document.querySelectorAll('.section[id], .main-header[id]');
+  const links = document.querySelectorAll('.sidebar-nav a');
   function updateActive() {
-    let current = '';
+    let current = 'home';
     sections.forEach(sec => {
-      if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
+      if (window.scrollY >= sec.offsetTop - 80) current = sec.id;
     });
-    fixedLinks.forEach(l => {
-      l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+    links.forEach(l => {
+      const href = l.getAttribute('href').replace('#','');
+      l.classList.toggle('active', href === current);
     });
-    // scroll active link into view inside nav
-    const active = document.querySelector('.fixed-nav .nav-link.active');
-    if (active) active.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
   }
   window.addEventListener('scroll', updateActive, {passive:true});
   updateActive();
-
 </script>
 </body>
 </html>
