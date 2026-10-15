@@ -4,7 +4,6 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Vinitha M Rajan</title>
-  
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
@@ -23,7 +22,7 @@
     a:hover{text-decoration:underline}
 
     /* ── LAYOUT ── */
-    .page{display:flex;min-height:100vh;max-width:1060px;margin:0 auto;padding:0}
+    .page{display:flex;min-height:100vh;max-width:1060px;margin:0 auto}
 
     /* ── SIDEBAR ── */
     .sidebar{
@@ -38,18 +37,12 @@
     .sidebar::-webkit-scrollbar-thumb{background:#ccc}
 
     .photo-wrap{margin-bottom:1.1rem;text-align:center}
-    .photo-wrap img{
-      width:150px;height:165px;object-fit:cover;
-      border:1px solid var(--border);display:block;margin:0 auto;
-    }
+    .photo-wrap img{width:150px;height:165px;object-fit:cover;border:1px solid var(--border);display:block;margin:0 auto}
     .sidebar-name{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:2px;text-align:center}
     .sidebar-role{font-size:12px;color:var(--muted);text-align:center;margin-bottom:1.25rem;line-height:1.5}
 
     .sidebar-nav{border-top:1px solid var(--border);padding-top:1rem;margin-bottom:1rem}
-    .sidebar-nav a{
-      display:block;font-size:13px;color:var(--link);
-      padding:4px 0;border-bottom:none;
-    }
+    .sidebar-nav a{display:block;font-size:13px;color:var(--link);padding:4px 0;cursor:pointer}
     .sidebar-nav a:hover{text-decoration:underline}
     .sidebar-nav a.active{font-weight:700;color:var(--navy)}
 
@@ -59,14 +52,17 @@
     /* ── MAIN ── */
     .main{flex:1;padding:2.5rem 2.75rem;min-width:0}
 
-    /* ── NAME HEADER ── */
+    /* ── TAB PAGES ── */
+    .tab-page{display:none}
+    .tab-page.active{display:block}
+
+    /* ── NAME HEADER (Home) ── */
     .main-header{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
     .main-header h1{font-size:1.9rem;font-weight:700;color:var(--text);margin-bottom:.25rem}
-    .main-header .role{font-size:14px;color:var(--muted);margin-bottom:.4rem}
-    .main-header .inst a{font-size:14px;color:var(--link)}
+    .main-header .inst{font-size:14px;margin-bottom:.4rem;line-height:1.8}
     .main-header .summary{font-size:14px;color:var(--muted);margin-top:.75rem;line-height:1.8;max-width:680px}
 
-    /* ── SECTIONS ── */
+    /* ── SECTION ── */
     .section{margin-bottom:2.25rem}
     .section h2{
       font-size:.85rem;font-weight:700;text-transform:uppercase;
@@ -80,10 +76,7 @@
     ul.plain li{font-size:14px;color:var(--text);margin-bottom:.4rem;padding-left:1rem;position:relative}
     ul.plain li::before{content:"·";position:absolute;left:0;color:var(--navy);font-weight:700}
 
-    ul.disc{padding-left:1.4rem;margin-top:.3rem}
-    ul.disc li{font-size:13.5px;color:var(--muted);margin-bottom:.3rem}
-
-    /* ── ENTRY (two-col role+period) ── */
+    /* ── ENTRY ── */
     .entry{margin-bottom:1.1rem}
     .entry-header{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:.5rem}
     .entry-title{font-size:14px;font-weight:700;color:var(--text)}
@@ -99,16 +92,15 @@
     .pub-meta{font-size:13px;color:var(--muted)}
     .pub-meta a{color:var(--link)}
 
-    /* ── COURSES TABLE ── */
+    /* ── TABLE ── */
     .course-table{width:100%;border-collapse:collapse;font-size:13.5px}
     .course-table th{text-align:left;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--light);border-bottom:1px solid var(--border);padding:.3rem .5rem}
     .course-table td{padding:.35rem .5rem;color:var(--text);border-bottom:1px solid #f0f0f0}
     .course-table tr:last-child td{border-bottom:none}
 
-    /* ── BADGES ── */
+    /* ── BADGE ── */
     .badge{display:inline-block;font-size:11px;padding:1px 8px;border-radius:3px;margin-left:6px;font-weight:400}
     .badge-pub{background:#e8f0fb;color:var(--navy)}
-    .badge-review{background:#e8f5ec;color:#1b5e42}
     .badge-award{background:#fdf6e3;color:#b8860b}
 
     /* ── AREAS ── */
@@ -116,12 +108,11 @@
     .area-tag{font-size:12.5px;padding:3px 12px;border:1px solid var(--border);border-radius:3px;color:var(--muted)}
 
     /* ── FOOTER ── */
-    footer{border-top:1px solid var(--border);padding:1rem 2.75rem;font-size:12px;color:var(--light);background:var(--bg)}
+    footer{border-top:1px solid var(--border);padding:1rem 2.75rem;font-size:12px;color:var(--light)}
 
     @media(max-width:720px){
       .page{flex-direction:column}
-      .sidebar{width:100%;height:auto;position:static;flex-direction:row;flex-wrap:wrap;gap:1.5rem;padding:1.25rem}
-      .photo-wrap{margin-bottom:0}
+      .sidebar{width:100%;height:auto;position:static;padding:1.25rem}
       .main{padding:1.5rem}
     }
   </style>
@@ -132,332 +123,342 @@
   <!-- ── SIDEBAR ── -->
   <aside class="sidebar">
     <div class="photo-wrap">
-      <!-- Replace entry.png with your actual photo filename -->
-      <img src="entry.png" alt="Vinitha M Rajan"
-        onerror="this.style.background='#e8eef6';this.style.minHeight='165px'"/>
+      <img src="entry.png" alt="Vinitha M Rajan" onerror="this.style.background='#e8eef6';this.style.minHeight='165px'"/>
     </div>
     <div class="sidebar-name">Vinitha M Rajan</div>
-    <div class="sidebar-role">PhD Scholar<br><a href="https://mfsdsai.iitpkd.ac.in/" target="_blank" style="color:var(--link)">Dept. of Data Science</a><br>IIT Palakkad</div>
+    <div class="sidebar-role">
+      <a href="https://mfsdsai.iitpkd.ac.in/" target="_blank" style="color:var(--link)">Dept. of Data Science</a><br><a href="https://iitpkd.ac.in/" target="_blank" style="color:var(--link)">IIT Palakkad</a>
+    </div>
 
     <nav class="sidebar-nav">
-      <a href="#home" class="active">Home</a>
-      <a href="#academic">Academic Profile</a>
-      <a href="#publications">Publications</a>
-      <a href="#projects">Research Projects</a>
-      <a href="#teaching">Teaching</a>
-      <a href="#workshops">Workshops</a>
-      <a href="#researchgroup">Research Group</a>
-      <a href="#posters">Poster Presentations</a>
-      <a href="#talks">Talks Attended</a>
-      <a href="#experience">Experience</a>
-      <a href="#achievements">Achievements</a>
-      <a href="#personal">Personal</a>
+      <a onclick="showTab('home')"        class="active">Home</a>
+      <a onclick="showTab('academic')">Academic Profile</a>
+      <a onclick="showTab('publications')">Publications</a>
+      <a onclick="showTab('projects')">Research Projects</a>
+      <a onclick="showTab('skills')">Skills</a>
+      <a onclick="showTab('teaching')">Teaching</a>
+      <a onclick="showTab('workshops')">Workshops</a>
+      <a onclick="showTab('researchgroup')">Research Group</a>
+      <a onclick="showTab('posters')">Poster Presentations</a>
+      <a onclick="showTab('talks')">Talks Attended</a>
+      <a onclick="showTab('experience')">Experience</a>
+      <a onclick="showTab('achievements')">Achievements</a>
+      <a onclick="showTab('personal')">Personal</a>
     </nav>
 
     <div class="sidebar-contact">
       <a href="mailto:112114001@smail.iitpkd.ac.in">112114001@smail.iitpkd.ac.in</a><br>
-      <a href="mailto:vinithamr.nitc@gmail.com">vinithamr.nitc@gmail.com</a><br>
-      <a href="tel:+919446382600">+91 9446382600</a><br><br>
       <a href="https://github.com/Vinitha-M-R" target="_blank">GitHub</a> &nbsp;·&nbsp;
-      <a href="https://linkedin.com/in/vinitha-m-rajan/" target="_blank">LinkedIn</a>
+      <a href="https://linkedin.com/in/vinitha-m-rajan/" target="_blank">LinkedIn</a> &nbsp;·&nbsp;
+      <a href="Vinitha_M_Rajan_CV_October2026.pdf" target="_blank">Complete CV</a>
     </div>
   </aside>
 
   <!-- ── MAIN ── -->
   <main class="main">
 
-    <!-- NAME HEADER -->
-    <div class="main-header" id="home">
-      <h1>Vinitha M Rajan</h1>
-
-      <div class="inst">
-        <a href="https://mfsdsai.iitpkd.ac.in/" target="_blank">Department of Data Science</a>, <a href="https://iitpkd.ac.in/" target="_blank">IIT Palakkad</a><br>
-        Member, <a href="https://mlgiitpkd.github.io/" target="_blank">Palakkad Machine Learning Group (MLG)</a><br>
-        Supervised by <a href="https://sahelybhadra.github.io/" target="_blank">Dr. Sahely Bhadra</a>
+    <!-- HOME -->
+    <div class="tab-page active" id="page-home">
+      <div class="main-header">
+        <h1>Vinitha M Rajan</h1>
+        <div class="inst">
+          <a href="https://mfsdsai.iitpkd.ac.in/" target="_blank">Department of Data Science</a>, <a href="https://iitpkd.ac.in/" target="_blank">IIT Palakkad</a><br>
+          Member, <a href="https://mlgiitpkd.github.io/" target="_blank">Machine Learning Group (MLG)</a><br>
+          Supervised by <a href="https://sahelybhadra.github.io/" target="_blank">Dr. Sahely Bhadra</a>
+        </div>
+        <p class="summary">
+          PhD scholar with research interests in time-series analysis, anomaly detection, deep learning, and Explainable AI.
+          My research focuses on developing reliable and interpretable learning methods for complex multivariate time-series data
+          with applications in industrial and real-world systems. My broader goal is to develop robust and explainable AI methods
+          that combine technological advances in machine learning with practical solutions to challenging real-world problems.
+        </p>
       </div>
-      <p class="summary">
-        PhD scholar with research interests in time-series analysis, anomaly detection, deep learning, and Explainable AI.
-        My research focuses on developing reliable and interpretable learning methods for complex multivariate time-series data
-        with applications in industrial and real-world systems. My broader goal is to develop robust and explainable AI methods
-        that combine technological advances in machine learning with practical solutions to challenging real-world problems.
-      </p>
-    </div>
-
-    <!-- RESEARCH AREAS -->
-    <div class="section">
-      <h2>Areas of Interest</h2>
-      <div class="areas">
-        <span class="area-tag">Time Series Analysis</span>
-        <span class="area-tag">Anomaly Detection</span>
-        <span class="area-tag">Deep Learning</span>
-        <span class="area-tag">Explainable AI</span>
-        <span class="area-tag">Data Analytics</span>
-        <span class="area-tag">Ethical AI</span>
-        <span class="area-tag">Text Mining</span>
+      <div class="section">
+        <h2>Areas of Interest</h2>
+        <div class="areas">
+          <span class="area-tag">Time Series Analysis</span>
+          <span class="area-tag">Anomaly Detection</span>
+          <span class="area-tag">Deep Learning</span>
+          <span class="area-tag">Explainable AI</span>
+          <span class="area-tag">Data Analytics</span>
+          <span class="area-tag">Ethical AI</span>
+          <span class="area-tag">Text Mining</span>
+        </div>
       </div>
     </div>
 
     <!-- ACADEMIC PROFILE -->
-    <div class="section" id="academic">
-      <h2>Academic Profile</h2>
-      <div class="entry">
-        <div class="entry-header"><div class="entry-title">PhD Scholar — Department of Data Science</div><div class="entry-period">2021 – Present</div></div>
-        <div class="entry-sub">Indian Institute of Technology Palakkad, Kerala &nbsp;·&nbsp; CGPA: 9.75/10</div>
-        <div class="entry-desc">Thesis: <em>Deep Modeling Techniques for Time Series Anomaly Detection</em> &nbsp;·&nbsp; Supervisor: Dr. Sahely Bhadra</div>
+    <div class="tab-page" id="page-academic">
+      <div class="section">
+        <h2>Academic Profile</h2>
+        <div class="entry">
+          <div class="entry-header"><div class="entry-title">PhD Scholar — Department of Data Science</div><div class="entry-period">2021 – Present</div></div>
+          <div class="entry-sub">Indian Institute of Technology Palakkad &nbsp;·&nbsp; CGPA: 9.75/10</div>
+          <div class="entry-desc">Thesis: <em>Deep Modeling Techniques for Time Series Anomaly Detection</em> &nbsp;·&nbsp; Supervisor: Dr. Sahely Bhadra</div>
+        </div>
+        <div class="entry">
+          <div class="entry-header"><div class="entry-title">M.Tech — Computer Science &amp; Engineering</div><div class="entry-period">2017 – 2019</div></div>
+          <div class="entry-sub">College of Engineering Trivandrum &nbsp;·&nbsp; CGPA: 9.47/10</div>
+        </div>
+        <div class="entry">
+          <div class="entry-header"><div class="entry-title">B.Tech — Computer Science &amp; Engineering</div><div class="entry-period">2004 – 2008</div></div>
+          <div class="entry-sub">National Institute of Technology Calicut &nbsp;·&nbsp; CGPA: 8.48/10</div>
+        </div>
       </div>
-      <div class="entry">
-        <div class="entry-header"><div class="entry-title">M.Tech — Computer Science &amp; Engineering</div><div class="entry-period">2017 – 2019</div></div>
-        <div class="entry-sub">College of Engineering Trivandrum &nbsp;·&nbsp; CGPA: 9.47/10</div>
+      <div class="section">
+        <h2>PhD Coursework &nbsp;<span style="font-size:12px;font-weight:400;text-transform:none;letter-spacing:0;color:var(--light)">Total Credits: 16 &nbsp;·&nbsp; CGPA: 9.75</span></h2>
+        <table class="course-table">
+          <thead><tr><th>Course</th><th>Title</th><th>Grade</th></tr></thead>
+          <tbody>
+            <tr><td>CS5512</td><td>Machine Learning</td><td>S</td></tr>
+            <tr><td>CS5011</td><td>Optimization</td><td>S</td></tr>
+            <tr><td>CS5007</td><td>Deep Learning</td><td>S</td></tr>
+            <tr><td>CS6006</td><td>Responsible AI</td><td>S</td></tr>
+            <tr><td>MA5007</td><td>Probability &amp; Statistics</td><td>A</td></tr>
+            <tr><td>GN6001</td><td>Research Methodology</td><td>P</td></tr>
+          </tbody>
+        </table>
       </div>
-      <div class="entry">
-        <div class="entry-header"><div class="entry-title">B.Tech — Computer Science &amp; Engineering</div><div class="entry-period">2004 – 2008</div></div>
-        <div class="entry-sub">National Institute of Technology Calicut &nbsp;·&nbsp; CGPA: 8.48/10</div>
-      </div>
-
-      <h2 style="margin-top:1.5rem">PhD Coursework &nbsp;<span style="font-size:12px;font-weight:400;text-transform:none;letter-spacing:0;color:var(--light)">Total Credits: 16 &nbsp;·&nbsp; CGPA: 9.75</span></h2>
-      <table class="course-table">
-        <thead><tr><th>Course</th><th>Title</th><th>Grade</th></tr></thead>
-        <tbody>
-          <tr><td>CS5512</td><td>Machine Learning</td><td>S</td></tr>
-          <tr><td>CS5011</td><td>Optimization</td><td>S</td></tr>
-          <tr><td>CS5007</td><td>Deep Learning</td><td>S</td></tr>
-          <tr><td>CS6006</td><td>Responsible AI</td><td>S</td></tr>
-          <tr><td>MA5007</td><td>Probability &amp; Statistics</td><td>A</td></tr>
-          <tr><td>GN6001</td><td>Research Methodology</td><td>P</td></tr>
-        </tbody>
-      </table>
     </div>
 
     <!-- PUBLICATIONS -->
-    <div class="section" id="publications">
-      <h2>Publications</h2>
-      <div class="pub">
-        <div class="pub-title">HEIGHTS: Hierarchical Graph Structure Learning for Time Series Anomaly Detection <span class="badge badge-pub">Journal 2026</span></div>
-        <div class="pub-meta">Vinitha M Rajan, Sahely Bhadra · <em>Journal of Neurocomputing</em>, Vol. 671, 2026, 132638<br>
-        <a href="https://doi.org/10.1016/j.neucom.2026.132638" target="_blank">doi.org/10.1016/j.neucom.2026.132638</a></div>
+    <div class="tab-page" id="page-publications">
+      <div class="section">
+        <h2>Publications</h2>
+        <div class="pub">
+          <div class="pub-title">HEIGHTS: Hierarchical Graph Structure Learning for Time Series Anomaly Detection <span class="badge badge-pub">Journal 2026</span></div>
+          <div class="pub-meta">Vinitha M Rajan, Sahely Bhadra · <em>Journal of Neurocomputing</em>, Vol. 671, 2026, 132638<br>
+          <a href="https://doi.org/10.1016/j.neucom.2026.132638" target="_blank">doi.org/10.1016/j.neucom.2026.132638</a></div>
+        </div>
+        <div class="pub">
+          <div class="pub-title">Architecture of a Semantic WordCloud Visualization <span class="badge badge-pub">Conference 2021</span></div>
+          <div class="pub-meta">Rajan V.M., Ramanujan A. · <em>Second Int. Conf. on Networks and Advances in Computational Technologies</em>, Springer<br>
+          <a href="https://doi.org/10.1007/978-3-030-49500-8_9" target="_blank">doi.org/10.1007/978-3-030-49500-8_9</a></div>
+        </div>
+        <p style="font-size:13px;color:var(--muted);margin-top:.75rem">
+          <strong>Reviewer:</strong> ICML 2024 &nbsp;·&nbsp; ComSys 2025, 2026 &nbsp;·&nbsp; ICDM 2026
+        </p>
       </div>
-      <div class="pub">
-        <div class="pub-title">Architecture of a Semantic WordCloud Visualization <span class="badge badge-pub">Conference 2021</span></div>
-        <div class="pub-meta">Rajan V.M., Ramanujan A. · <em>Second Int. Conf. on Networks and Advances in Computational Technologies</em>, Springer<br>
-        DOI: <a href="https://doi.org/10.1007/978-3-030-49500-8_9" target="_blank">10.1007/978-3-030-49500-8_9</a></div>
-      </div>
-      <p style="font-size:13px;color:var(--muted);margin-top:.5rem">
-        <strong>Reviewer:</strong> ICML 2024 &nbsp;·&nbsp; ComSys 2025, 2026 &nbsp;·&nbsp; ICDM 2026
-      </p>
     </div>
 
     <!-- RESEARCH PROJECTS -->
-    <div class="section" id="projects">
-      <h2>Research Projects</h2>
-      <div class="entry">
-        <div class="entry-header"><div class="entry-title">1. Multi-Variate Time Series Anomaly Detection</div><div class="entry-period">Aug 2021 – Present</div></div>
-        <div class="entry-desc">Exploring unsupervised methods for anomaly detection in multivariate time-series from cyber-physical systems:
-          <ul>
-            <li><strong>HEIGHTS</strong> — Hierarchical Graph Structure Learning using two-level multi-view learning. Published in Neurocomputing 2026.</li>
-            <li><strong>FILTER</strong> — Nonparametric Feature Clustering for automatic feature grouping and explainable anomaly detection. <em>Under review.</em></li>
-            <li><strong>ProtoAD</strong> — Explainable anomaly detection via prototypes representing normal system behaviour.</li>
-          </ul>
+    <div class="tab-page" id="page-projects">
+      <div class="section">
+        <h2>Research Projects</h2>
+        <div class="entry">
+          <div class="entry-header"><div class="entry-title">1. Multi-Variate Time Series Anomaly Detection</div><div class="entry-period">Aug 2021 – Present</div></div>
+          <div class="entry-desc">Exploring unsupervised methods for anomaly detection in multivariate time-series from cyber-physical systems:
+            <ul>
+              <li><strong>HEIGHTS</strong> — Hierarchical Graph Structure Learning using two-level multi-view learning. Published in Neurocomputing 2026.</li>
+              <li><strong>FILTER</strong> — Nonparametric Feature Clustering for automatic feature grouping and explainable anomaly detection. <em>Under review.</em></li>
+              <li><strong>ProtoAD</strong> — Explainable anomaly detection via prototypes representing normal system behaviour.</li>
+            </ul>
+          </div>
         </div>
-      </div>
-      <div class="entry">
-        <div class="entry-header"><div class="entry-title">2. Fast Radio Burst (FRB) Identification in Astronomical Time Series</div><div class="entry-period">Nov 2022 – Jan 2024</div></div>
-        <div class="entry-sub">Collaboration with NCRA Pune, NVIDIA, and IIT Palakkad (NVAITC Program)</div>
-        <div class="entry-desc">Developed a multi-beam AI classifier to detect FRBs. Contributed to the <strong>SPOTLIGHT</strong> system deployed at GMRT, NCRA, Pune.</div>
-      </div>
-      <div class="entry">
-        <div class="entry-header"><div class="entry-title">3. TCAV — Testing with Concept Activation Vectors</div><div class="entry-period">April 2022</div></div>
-        <div class="entry-desc">Applied TCAV (Google) to a fruit classifier (GoogleNet on Fruits360) to identify human-friendly concepts. (CS6006: Responsible AI, IIT Palakkad)</div>
-      </div>
-      <div class="entry">
-        <div class="entry-header"><div class="entry-title">4. Image Captioning with CNN-LSTM</div><div class="entry-period">April 2022</div></div>
-        <div class="entry-desc">Deep learning framework for automatic image caption generation evaluated using BLEU score. (CS5007: Deep Learning, IIT Palakkad)</div>
-      </div>
-      <div class="entry">
-        <div class="entry-header"><div class="entry-title">5. Automatic Summarization using Semantic WordClouds</div><div class="entry-period">May 2018 – July 2019</div></div>
-        <div class="entry-sub">M.Tech Thesis · Published at NetCom 2021, Springer</div>
-        <div class="entry-desc">Novel semantic word cloud methodology using K-Medoids clustering on co-occurrence similarity matrices, evaluated using "Realized Adjacencies" metric.</div>
+        <div class="entry">
+          <div class="entry-header"><div class="entry-title">2. Fast Radio Burst (FRB) Identification in Astronomical Time Series</div><div class="entry-period">Nov 2022 – Jan 2024</div></div>
+          <div class="entry-sub">Collaboration with NCRA Pune, NVIDIA, and IIT Palakkad (NVAITC Program)</div>
+          <div class="entry-desc">Developed a multi-beam AI classifier to detect FRBs. Contributed to the <strong>SPOTLIGHT</strong> system deployed at GMRT, NCRA, Pune.</div>
+        </div>
+        <div class="entry">
+          <div class="entry-header"><div class="entry-title">3. TCAV — Testing with Concept Activation Vectors</div><div class="entry-period">April 2022</div></div>
+          <div class="entry-desc">Applied TCAV (Google) to a fruit classifier (GoogleNet on Fruits360) to identify human-friendly concepts. (CS6006: Responsible AI, IIT Palakkad)</div>
+        </div>
+        <div class="entry">
+          <div class="entry-header"><div class="entry-title">4. Image Captioning with CNN-LSTM</div><div class="entry-period">April 2022</div></div>
+          <div class="entry-desc">Deep learning framework for automatic image caption generation evaluated using BLEU score. (CS5007: Deep Learning, IIT Palakkad)</div>
+        </div>
+        <div class="entry">
+          <div class="entry-header"><div class="entry-title">5. Automatic Summarization using Semantic WordClouds</div><div class="entry-period">May 2018 – July 2019</div></div>
+          <div class="entry-sub">M.Tech Thesis · Published at NetCom 2021, Springer</div>
+          <div class="entry-desc">Novel semantic word cloud methodology using K-Medoids clustering on co-occurrence similarity matrices, evaluated using "Realized Adjacencies" metric.</div>
+        </div>
       </div>
     </div>
 
     <!-- SKILLS -->
-    <div class="section" id="skills">
-      <h2>Skills</h2>
-      <ul class="plain">
-        <li><strong>Languages:</strong> Python, MATLAB, Java, C, C++, HTML</li>
-        <li><strong>Frameworks:</strong> PyTorch, TensorFlow, Scikit-learn, NumPy, Pandas, Matplotlib, Seaborn, Optuna, Ray Tuning</li>
-        <li><strong>Tools:</strong> Jupyter, Google Colab, Spyder, Visual Studio, NetBeans, Conda</li>
-      </ul>
+    <div class="tab-page" id="page-skills">
+      <div class="section">
+        <h2>Skills</h2>
+        <ul class="plain">
+          <li><strong>Languages:</strong> Python, MATLAB, Java, C, C++, HTML</li>
+          <li><strong>Frameworks:</strong> PyTorch, TensorFlow, Scikit-learn, NumPy, Pandas, Matplotlib, Seaborn, Optuna, Ray Tuning</li>
+          <li><strong>Tools:</strong> Jupyter, Google Colab, Spyder, Visual Studio, NetBeans, Conda</li>
+        </ul>
+      </div>
     </div>
 
     <!-- TEACHING -->
-    <div class="section" id="teaching">
-      <h2>Teaching Assistance &nbsp;<span style="font-size:12px;font-weight:400;text-transform:none;letter-spacing:0;color:var(--light)">IIT Palakkad · Masters &amp; Undergraduate students</span></h2>
-      <table class="course-table">
-        <thead><tr><th>Course</th><th>Title</th><th>Period</th></tr></thead>
-        <tbody>
-          <tr><td>DS2010</td><td>Optimization</td><td>Aug–Dec '22, Aug–Dec '23</td></tr>
-          <tr><td>DS5608</td><td>Time Series Analysis</td><td>Jan–May '24</td></tr>
-          <tr><td>DS5612</td><td>Data Mining</td><td>Aug–Dec '24</td></tr>
-          <tr><td>DS3030</td><td>Data Analytics</td><td>Aug–Dec '25</td></tr>
-          <tr><td>DS3060</td><td>AI Ethics</td><td>Jan–May '25, Jan–May '26</td></tr>
-        </tbody>
-      </table>
-
-      <h2 style="margin-top:1.5rem">Teaching Experience</h2>
-      <div class="entry">
-        <div class="entry-header"><div class="entry-title">Assistant Professor</div><div class="entry-period">Jan – Jul 2020</div></div>
-        <div class="entry-sub">Mar Baselios College of Engineering and Technology, Trivandrum</div>
-        <div class="entry-desc">Courses: Software Engineering, Advanced Computer Architecture.</div>
+    <div class="tab-page" id="page-teaching">
+      <div class="section">
+        <h2>Teaching Assistance &nbsp;<span style="font-size:12px;font-weight:400;text-transform:none;letter-spacing:0;color:var(--light)">IIT Palakkad · Masters &amp; Undergraduate students</span></h2>
+        <table class="course-table">
+          <thead><tr><th>Course</th><th>Title</th><th>Period</th></tr></thead>
+          <tbody>
+            <tr><td>DS2010</td><td>Optimization</td><td>Aug–Dec '22, Aug–Dec '23</td></tr>
+            <tr><td>DS5608</td><td>Time Series Analysis</td><td>Jan–May '24</td></tr>
+            <tr><td>DS5612</td><td>Data Mining</td><td>Aug–Dec '24</td></tr>
+            <tr><td>DS3030</td><td>Data Analytics</td><td>Aug–Dec '25</td></tr>
+            <tr><td>DS3060</td><td>AI Ethics</td><td>Jan–May '25, Jan–May '26</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="section">
+        <h2>Teaching Experience</h2>
+        <div class="entry">
+          <div class="entry-header"><div class="entry-title">Assistant Professor</div><div class="entry-period">Jan – Jul 2020</div></div>
+          <div class="entry-sub">Mar Baselios College of Engineering and Technology, Trivandrum</div>
+          <div class="entry-desc">Courses: Software Engineering, Advanced Computer Architecture.</div>
+        </div>
       </div>
     </div>
 
     <!-- WORKSHOPS -->
-    <div class="section" id="workshops">
-      <h2>Workshops Conducted</h2>
-      <ul class="plain">
-        <li>Petrichor TechFest 2022, IIT Palakkad — Hands-on ML session (Linear Regression, SVM, Clustering)</li>
-        <li>ScienceQuest (AI for School Students), IIT Palakkad, 2023 &amp; 2024 — Google Teachable Machine, image classification</li>
-        <li>Time Series Workshop, IIT Palakkad, 2024 — ARIMA, SARIMA, RNN, LSTM, GRU</li>
-        <li>AI &amp; Data Science Session, Annual Open House, IIT Palakkad, 2025</li>
-        <li>Data Analytics Certification Course, IIT Palakkad, 2026 — Clustering &amp; Association Rule Mining</li>
-      </ul>
-
-      <h2 style="margin-top:1.5rem">Workshops Attended</h2>
-      <ul class="plain">
-        <li>Data Science: Probabilistic and Optimization Methods — ICTS (TIFR), Bangalore</li>
-        <li>MATLAB for Machine Learning — Mathworks &amp; IIT Palakkad</li>
-        <li>Applications of AI for Predictive Maintenance — NVIDIA Deep Learning Institute</li>
-        <li>Accelerating Data Engineering Pipelines — NVIDIA Deep Learning Institute</li>
-        <li>Fundamentals of Deep Learning — NVIDIA Deep Learning Institute</li>
-        <li>Technical Writing Workshop — IIT Palakkad &amp; IIT Madras</li>
-        <li>Sun Certified Programmer for Java 6 — Oracle India Private Limited</li>
-      </ul>
-
+    <div class="tab-page" id="page-workshops">
+      <div class="section">
+        <h2>Workshops Conducted</h2>
+        <ul class="plain">
+          <li>Petrichor TechFest 2022, IIT Palakkad — Hands-on ML session (Linear Regression, SVM, Clustering)</li>
+          <li>ScienceQuest (AI for School Students), IIT Palakkad, 2023 &amp; 2024 — Google Teachable Machine, image classification</li>
+          <li>Time Series Workshop, IIT Palakkad, 2024 — ARIMA, SARIMA, RNN, LSTM, GRU</li>
+          <li>AI &amp; Data Science Session, Annual Open House, IIT Palakkad, 2025</li>
+          <li>Data Analytics Certification Course, IIT Palakkad, 2026 — Clustering &amp; Association Rule Mining</li>
+        </ul>
+      </div>
+      <div class="section">
+        <h2>Workshops Attended</h2>
+        <ul class="plain">
+          <li>Data Science: Probabilistic and Optimization Methods — ICTS (TIFR), Bangalore</li>
+          <li>MATLAB for Machine Learning — Mathworks &amp; IIT Palakkad</li>
+          <li>Applications of AI for Predictive Maintenance — NVIDIA Deep Learning Institute</li>
+          <li>Accelerating Data Engineering Pipelines — NVIDIA Deep Learning Institute</li>
+          <li>Fundamentals of Deep Learning — NVIDIA Deep Learning Institute</li>
+          <li>Technical Writing Workshop — IIT Palakkad &amp; IIT Madras</li>
+          <li>Sun Certified Programmer for Java 6 — Oracle India Private Limited</li>
+        </ul>
+      </div>
     </div>
 
-    <!-- RESEARCH GROUP ACTIVITIES -->
-    <div class="section" id="researchgroup">
-      <h2>Research Group &nbsp;<span style="font-size:12px;font-weight:400;text-transform:none;letter-spacing:0;color:var(--light)"><a href="https://mlgiitpkd.github.io/" target="_blank">MLG IIT Palakkad</a></span></h2>
-      <ul class="plain">
-        <li>Florence Nightingale Data Science Talk Series — Organised monthly talks by experts in academia and industry</li>
-        <li>Journal Reading Club — Presented papers on Transformer, TranAD, KAN, KAN-AD, ProtoAD, Normalizing Flow, Reinforcement Learning, Grover's Algorithm</li>
-        <li>Website Maintenance — Research group website</li>
-        <li>Server Management — GPU server administration, user access, and environment setup</li>
-      </ul>
-    </div>
-
-    <!-- TALKS -->
-    <div class="section" id="talks">
+    <!-- RESEARCH GROUP -->
+    <div class="tab-page" id="page-researchgroup">
+      <div class="section">
+        <h2>Research Group &nbsp;<span style="font-size:12px;font-weight:400;text-transform:none;letter-spacing:0;color:var(--light)"><a href="https://mlgiitpkd.github.io/" target="_blank">MLG IIT Palakkad</a></span></h2>
+        <ul class="plain">
+          <li>Florence Nightingale Data Science Talk Series — Organised monthly talks by experts in academia and industry</li>
+          <li>Journal Reading Club — Presented papers on Transformer, TranAD, KAN, KAN-AD, ProtoAD, Normalizing Flow, Reinforcement Learning, Grover's Algorithm</li>
+          <li>Website Maintenance — Research group website</li>
+          <li>Server Management — GPU server administration, user access, and environment setup</li>
+        </ul>
+      </div>
     </div>
 
     <!-- POSTER PRESENTATIONS -->
-    <div class="section" id="posters">
-      <h2>Poster Presentations</h2>
-      <ul class="plain">
-        <li><strong>HEIGHTS</strong> — IAC 5.0 (2023), Annual Research Scholars' Day 2024, Data Science Research Symposium 2026, IAC 8.0 (2026) &nbsp;·&nbsp; IIT Palakkad</li>
-        <li><strong>FILTER</strong> — Annual Research Scholars' Day 2026 &nbsp;·&nbsp; IIT Palakkad</li>
-        <li>🏆 <strong>Best Research Talk Award</strong> — Annual Research Scholars' Day 2025, Dept. of Data Science, IIT Palakkad <span class="badge badge-award">Award</span></li>
-      </ul>
-
+    <div class="tab-page" id="page-posters">
+      <div class="section">
+        <h2>Poster Presentations</h2>
+        <ul class="plain">
+          <li><strong>HEIGHTS</strong> — IAC 5.0 (2023), Annual Research Scholars' Day 2024, Data Science Research Symposium 2026, IAC 8.0 (2026) &nbsp;·&nbsp; IIT Palakkad</li>
+          <li><strong>FILTER</strong> — Annual Research Scholars' Day 2026 &nbsp;·&nbsp; IIT Palakkad</li>
+          <li>🏆 <strong>Best Research Talk Award</strong> — Annual Research Scholars' Day 2025, Dept. of Data Science, IIT Palakkad <span class="badge badge-award">Award</span></li>
+        </ul>
+      </div>
     </div>
 
-    <!-- INVITED TALKS -->
-    <div class="section" id="talks">
-      <h2>Talks Attended</h2>
-      <ul class="plain">
-        <li>Fundamental Limits of Learning Non-Hallucinating Generative Models — Prof. Ananth Grama, Purdue University</li>
-        <li>New Frontiers in AI and Biomedicine — Prof. Shankar Subramaniam, UC San Diego</li>
-        <li>LLMs to Improve Ads Quality — Dr. Samarth Bharadwaj, Microsoft</li>
-        <li>Temporal Graph Pipelines: From Algorithmics to Predictive Models — Prof. Srikanta Bedathur, IIT Delhi</li>
-        <li>Efficient, Robust, and Equitable: A Decade of Deep Learning — Prof. R. Venkatesh Babu, IISc Bangalore</li>
-        <li>Practical Applications of Large Language Models — Dr. Ashish Tendulkar, Google</li>
-        <li>Explainability is All You Need: AI and Law — Dr. Kripabandhu Ghosh, IISER Kolkata</li>
-        <li>AI-in-the-loop for Healthcare — Prof. Sriraam Natarajan, University of Texas</li>
-        <li>The Power of Pretraining — Prof. Niloy Ganguly, IIT Kharagpur</li>
-        <li>Data-driven Decision Frameworks for COVID-19 — Prof. Rajesh Sundaresan, IISc Bangalore</li>
-        <li>Question Answering using Knowledge Graphs — Dr. Soumajit Pramanik, IIT Bhilai</li>
-        <li>When Algorithms Meet Self-Interest: Multi-Agent AI — Dr. Swaprava Nath, IIT Bombay</li>
-      </ul>
+    <!-- TALKS ATTENDED -->
+    <div class="tab-page" id="page-talks">
+      <div class="section">
+        <h2>Talks Attended</h2>
+        <ul class="plain">
+          <li>Fundamental Limits of Learning Non-Hallucinating Generative Models — Prof. Ananth Grama, Purdue University</li>
+          <li>New Frontiers in AI and Biomedicine — Prof. Shankar Subramaniam, UC San Diego</li>
+          <li>LLMs to Improve Ads Quality — Dr. Samarth Bharadwaj, Microsoft</li>
+          <li>Temporal Graph Pipelines: From Algorithmics to Predictive Models — Prof. Srikanta Bedathur, IIT Delhi</li>
+          <li>Efficient, Robust, and Equitable: A Decade of Deep Learning — Prof. R. Venkatesh Babu, IISc Bangalore</li>
+          <li>Practical Applications of Large Language Models — Dr. Ashish Tendulkar, Google</li>
+          <li>Explainability is All You Need: AI and Law — Dr. Kripabandhu Ghosh, IISER Kolkata</li>
+          <li>AI-in-the-loop for Healthcare — Prof. Sriraam Natarajan, University of Texas</li>
+          <li>The Power of Pretraining — Prof. Niloy Ganguly, IIT Kharagpur</li>
+          <li>Data-driven Decision Frameworks for COVID-19 — Prof. Rajesh Sundaresan, IISc Bangalore</li>
+          <li>Question Answering using Knowledge Graphs — Dr. Soumajit Pramanik, IIT Bhilai</li>
+          <li>When Algorithms Meet Self-Interest: Multi-Agent AI — Dr. Swaprava Nath, IIT Bombay</li>
+        </ul>
+      </div>
     </div>
 
     <!-- EXPERIENCE -->
-    <div class="section" id="experience">
-      <h2>Experience</h2>
-      <div class="entry">
-        <div class="entry-header"><div class="entry-title">PhD Research Scholar</div><div class="entry-period">2021 – Present</div></div>
-        <div class="entry-sub">Department of Data Science, IIT Palakkad</div>
-      </div>
-      <div class="entry">
-        <div class="entry-header"><div class="entry-title">Assistant Professor</div><div class="entry-period">Jan – Jul 2020</div></div>
-        <div class="entry-sub">Mar Baselios College of Engineering and Technology, Trivandrum</div>
-        <div class="entry-desc">Courses: Software Engineering, Advanced Computer Architecture.</div>
-      </div>
-      <div class="entry">
-        <div class="entry-header"><div class="entry-title">Senior Applications Engineer</div><div class="entry-period">Jun 2012 – Sep 2015</div></div>
-        <div class="entry-sub">Oracle India Private Limited, Technopark, Trivandrum</div>
-        <div class="entry-desc">Oracle CRM On Demand — Maintained cloud application providing Oracle Siebel CRM services.</div>
-      </div>
-      <div class="entry">
-        <div class="entry-header"><div class="entry-title">Applications Engineer</div><div class="entry-period">Jun 2009 – May 2012</div></div>
-        <div class="entry-sub">Oracle India Private Limited, HITEC City, Hyderabad</div>
-        <div class="entry-desc">Application Management Pack — plugin between Oracle Enterprise Manager and Oracle E-Business Suite.</div>
-      </div>
-      <div class="entry">
-        <div class="entry-header"><div class="entry-title">Associate Applications Engineer</div><div class="entry-period">May 2008 – May 2009</div></div>
-        <div class="entry-sub">Oracle India Private Limited, HITEC City, Hyderabad</div>
+    <div class="tab-page" id="page-experience">
+      <div class="section">
+        <h2>Experience</h2>
+        <div class="entry">
+          <div class="entry-header"><div class="entry-title">PhD Research Scholar</div><div class="entry-period">2021 – Present</div></div>
+          <div class="entry-sub">Department of Data Science, IIT Palakkad</div>
+        </div>
+        <div class="entry">
+          <div class="entry-header"><div class="entry-title">Assistant Professor</div><div class="entry-period">Jan – Jul 2020</div></div>
+          <div class="entry-sub">Mar Baselios College of Engineering and Technology, Trivandrum</div>
+          <div class="entry-desc">Courses: Software Engineering, Advanced Computer Architecture.</div>
+        </div>
+        <div class="entry">
+          <div class="entry-header"><div class="entry-title">Senior Applications Engineer</div><div class="entry-period">Jun 2012 – Sep 2015</div></div>
+          <div class="entry-sub">Oracle India Private Limited, Technopark, Trivandrum</div>
+          <div class="entry-desc">Oracle CRM On Demand — Maintained cloud application providing Oracle Siebel CRM services.</div>
+        </div>
+        <div class="entry">
+          <div class="entry-header"><div class="entry-title">Applications Engineer</div><div class="entry-period">Jun 2009 – May 2012</div></div>
+          <div class="entry-sub">Oracle India Private Limited, HITEC City, Hyderabad</div>
+          <div class="entry-desc">Application Management Pack — plugin between Oracle Enterprise Manager and Oracle E-Business Suite.</div>
+        </div>
+        <div class="entry">
+          <div class="entry-header"><div class="entry-title">Associate Applications Engineer</div><div class="entry-period">May 2008 – May 2009</div></div>
+          <div class="entry-sub">Oracle India Private Limited, HITEC City, Hyderabad</div>
+        </div>
       </div>
     </div>
 
     <!-- ACHIEVEMENTS -->
-    <div class="section" id="achievements">
-      <h2>Academic Achievements</h2>
-      <ul class="plain">
-        <li>UGC-NET JRF Award with 100 percentile score — December 2019 <span class="badge badge-award">Award</span></li>
-        <li>UGC-NET Assistant Professor Qualification — December 2019</li>
-        <li>Best Research Talk — Annual Research Scholars' Day 2025, Dept. of Data Science, IIT Palakkad <span class="badge badge-award">Award</span></li>
-        <li>Academic Excellence Award — College of Engineering Trivandrum, 2019</li>
-        <li>GATE 2017 — All India Rank 826, Score: 684</li>
-        <li>AIEEE 2004 — All India Rank 2920, Kerala Rank: 97</li>
-        <li>Kerala Engineering Entrance 2004 — Rank 151</li>
-      </ul>
+    <div class="tab-page" id="page-achievements">
+      <div class="section">
+        <h2>Academic Achievements</h2>
+        <ul class="plain">
+          <li>UGC-NET JRF Award with 100 percentile score — December 2019 <span class="badge badge-award">Award</span></li>
+          <li>UGC-NET Assistant Professor Qualification — December 2019</li>
+          <li>Best Research Talk — Annual Research Scholars' Day 2025, Dept. of Data Science, IIT Palakkad <span class="badge badge-award">Award</span></li>
+          <li>Academic Excellence Award — College of Engineering Trivandrum, 2019</li>
+          <li>GATE 2017 — All India Rank 826, Score: 684</li>
+          <li>AIEEE 2004 — All India Rank 2920, Kerala Rank: 97</li>
+          <li>Kerala Engineering Entrance 2004 — Rank 151</li>
+        </ul>
+      </div>
     </div>
 
     <!-- PERSONAL -->
-    <div class="section" id="personal">
-      <h2>Personal</h2>
-      <ul class="plain">
-        <li><strong>Date of Birth:</strong> 10 April 1986</li>
-        <li><strong>Nationality:</strong> Indian</li>
-        <li><strong>Languages:</strong> Malayalam (Native), English, Hindi, Tamil, Telugu</li>
-        <li><strong>Address:</strong> Aswathi (H), Anickadu P.O., Kottayam, Kerala, India — 686503</li>
-        <li><strong>Personal Email:</strong> <a href="mailto:vinithamr.nitc@gmail.com">vinithamr.nitc@gmail.com</a></li>
-        <li><strong>Phone:</strong> <a href="tel:+919446382600">+91 9446382600</a></li>
-      </ul>
+    <div class="tab-page" id="page-personal">
+      <div class="section">
+        <h2>Personal</h2>
+        <ul class="plain">
+          <li><strong>Date of Birth:</strong> 10 April 1986</li>
+          <li><strong>Nationality:</strong> Indian</li>
+          <li><strong>Languages:</strong> Malayalam (Native), English, Hindi, Tamil, Telugu</li>
+          <li><strong>Address:</strong> Aswathi (H), Anickadu P.O., Kottayam, Kerala, India — 686503</li>
+          <li><strong>Personal Email:</strong> <a href="mailto:vinithamr.nitc@gmail.com">vinithamr.nitc@gmail.com</a></li>
+          <li><strong>Phone:</strong> <a href="tel:+919446382600">+91 9446382600</a></li>
+        </ul>
+      </div>
     </div>
 
   </main>
 </div>
 
-<footer>
-  &copy; 2026 Vinitha M Rajan &nbsp;·&nbsp; Department of Data Science, IIT Palakkad
-</footer>
+<footer>&copy; 2026 Vinitha M Rajan &nbsp;·&nbsp; Department of Data Science, IIT Palakkad</footer>
 
 <script>
-  // Highlight active sidebar link on scroll
-  const sections = document.querySelectorAll('.section[id], .main-header[id]');
-  const links = document.querySelectorAll('.sidebar-nav a');
-  function updateActive() {
-    let current = 'home';
-    sections.forEach(sec => {
-      if (window.scrollY >= sec.offsetTop - 80) current = sec.id;
-    });
-    links.forEach(l => {
-      const href = l.getAttribute('href').replace('#','');
-      l.classList.toggle('active', href === current);
-    });
+  function showTab(id) {
+    document.querySelectorAll('.tab-page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    event.target.classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
   }
-  window.addEventListener('scroll', updateActive, {passive:true});
-  updateActive();
 </script>
 </body>
 </html>
